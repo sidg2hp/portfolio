@@ -87,28 +87,3 @@ To run the production server:
 npm run start
 ```
 *(Ensure `NODE_ENV=production` is set in your environment).*
-
-## 🌍 Deployment Options
-
-### Deploying to Render (Recommended for Full-Stack Node + SQLite)
-
-1.  Push your code to a GitHub repository.
-2.  Log in to [Render](https://render.com/) and click **New > Web Service**.
-3.  Connect your GitHub repo.
-4.  Configure the service:
-    *   **Runtime:** `Node`
-    *   **Build Command:** `npm install && npm run build`
-    *   **Start Command:** `npm run start`
-5.  Set your Environment Variables on Render:
-    *   `NODE_ENV=production`
-    *   `JWT_SECRET=your_production_secret`
-6.  Click **Create Web Service**.
-
-## 👨‍💻 Author
-
-**Siddhartha Goswami**
-*   [GitHub (@sidg2hp)](https://github.com/sidg2hp)
-*   [LinkedIn](https://www.linkedin.com/in/siddhartha-goswami-1a83681b2/)
-
----
-*Built with ❤️ and simulating Linux.*
