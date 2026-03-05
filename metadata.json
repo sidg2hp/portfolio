@@ -1,0 +1,5 @@
+{
+  "name": "Ubuntu Portfolio",
+  "description": "A portfolio website simulating the Ubuntu 22.04 GNOME desktop experience with a functional terminal, snake game, and backend API.",
+  "requestFramePermissions": []
+}
