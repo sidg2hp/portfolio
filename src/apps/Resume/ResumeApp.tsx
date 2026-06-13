@@ -11,7 +11,7 @@ export const ResumeApp: React.FC = () => {
             <span className="font-medium text-sm">resume.pdf</span>
           </div>
           <a
-            href="https://drive.google.com/file/d/1SToRZMzHtBUlrahoanp_g4eIlESEfkWG/view?usp=sharing"
+            href="https://drive.google.com/file/d/11n9IYV7lZZN-7RM5gwyHwSuryNhmYXdz/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-1 bg-[#E95420] hover:bg-[#C74215] px-3 py-1.5 rounded text-xs font-bold transition-colors"
