@@ -82,7 +82,7 @@ export const AboutApp: React.FC = () => {
             <span className="snapshot-label">RESULT</span><strong>99.96% coverage</strong><span>FlixPulse · 5.7M+ ratings · MAP@10 0.743</span><b>See the system <ArrowUpRight size={13} /></b>
           </button>
           <button className="about-snapshot-card" onClick={() => scrollToSection('achievements')}>
-            <span className="snapshot-label">RECOGNITION</span><strong>3× Hackathon Winner</strong><span>Codeforces Expert · maximum rating 1607</span><b>View proof <ArrowUpRight size={13} /></b>
+            <span className="snapshot-label">RECOGNITION</span><strong>3× Hackathon Winner</strong><span>Codeforces Expert · maximum rating 1607</span><b>View achievements <ArrowUpRight size={13} /></b>
           </button>
         </div>
       </section>
