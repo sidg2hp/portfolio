@@ -58,7 +58,7 @@ export const projects = [
       'Evaluated RMSE, MAE, MAP@10, NDCG@10, Hit Rate, Coverage, and Diversity, achieving 99.96% user coverage.',
     ],
     stack: ['Python', 'FastAPI', 'React', 'SVD', 'KNN', 'scikit-learn'],
-    link: 'https://github.com/sidg2hp/flixpulse',
+    link: 'https://github.com/sidg2hp',
     category: 'ml',
     accent: 'blue',
   },
