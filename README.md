@@ -8,6 +8,9 @@ A recruiter-friendly Ubuntu portfolio desktop for Siddhartha Goswami, an AI/ML e
 - Resume-led project stories for Enterprise Knowledge Assistant, Video Blog App, and FlixPulse.
 - Exact attached resume PDF served locally as `public/Siddhartha_Goswami_Resume.pdf`.
 - About, Resume, Terminal, System Monitor, and Snake apps are available from the dock.
+- The About app is a scrollable mini-portfolio with sticky section navigation and expandable project case studies.
+- The System Monitor is a truthful portfolio evidence dashboard rather than fictional CPU/network telemetry.
+- Terminal supports resume-backed `projects`, `project <name>`, `experience`, `achievements`, and command history with ↑/↓.
 - Express API for terminal data and Snake high scores.
 
 ## Stack
