@@ -40,8 +40,8 @@ export const Window: React.FC<WindowProps> = ({ id, title, children, initialWidt
       style={{ 
         position: 'absolute', 
         zIndex: windowState.zIndex,
-        top: windowState.maximized ? 28 : '8%',
-        left: windowState.maximized ? 64 : '13%',
+        top: windowState.maximized ? 28 : id === 'recruiter' ? '5%' : id === 'projects' ? '10%' : '8%',
+        left: windowState.maximized ? 64 : id === 'recruiter' ? '8%' : id === 'projects' ? '16%' : '13%',
       }}
       onMouseDown={() => focusWindow(id)}
       className={clsx(

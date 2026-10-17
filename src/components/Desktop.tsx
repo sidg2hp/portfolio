@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, FileText, Terminal, User } from 'lucide-react';
+import { Activity, BriefcaseBusiness, FileText, FolderKanban, Terminal, User } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import { useStore } from '../store/useStore';
 import { AboutApp } from '../apps/About/AboutApp';
@@ -7,6 +7,8 @@ import { ResumeApp } from '../apps/Resume/ResumeApp';
 import { SnakeApp } from '../apps/Snake/SnakeApp';
 import { SystemMonitorApp } from '../apps/SystemMonitor/SystemMonitorApp';
 import { TerminalApp } from '../apps/Terminal/TerminalApp';
+import { ProjectsApp } from '../apps/Projects/ProjectsApp';
+import { RecruiterApp } from '../apps/Recruiter/RecruiterApp';
 import { Dock } from './Dock';
 import { DesktopIcon } from './DesktopIcon';
 import { TopBar } from './TopBar';
@@ -33,10 +35,16 @@ export const Desktop: React.FC = () => {
         <h1>Welcome to<br /><strong>{profile.name}</strong></h1>
         <p>{profile.role} · {profile.location}</p>
         <div className="desktop-welcome-hint"><span>01</span> Start with <b>About Siddhartha</b></div>
+        <div className="desktop-welcome-actions">
+          <button onClick={() => openWindow('recruiter')}><BriefcaseBusiness size={14} /> Recruiter brief</button>
+          <button onClick={() => openWindow('projects')}><FolderKanban size={14} /> Explore projects</button>
+        </div>
       </section>
 
       <div className="desktop-icons desktop-icons-primary">
+        <DesktopIcon name="Recruiter Brief" icon={<BriefcaseBusiness size={42} />} onActivate={() => openWindow('recruiter')} />
         <DesktopIcon name="About Siddhartha" icon={<User size={42} />} onActivate={() => openWindow('about')} />
+        <DesktopIcon name="Projects" icon={<FolderKanban size={42} />} onActivate={() => openWindow('projects')} />
         <DesktopIcon name="Resume PDF" icon={<FileText size={42} />} onActivate={() => openWindow('resume')} />
       </div>
 
@@ -55,16 +63,18 @@ export const Desktop: React.FC = () => {
             <div key={window.id} className="pointer-events-auto">
               <Window
                 id={window.id}
-                title={window.id === 'about' ? 'About Siddhartha' : window.id === 'monitor' ? 'System Monitor' : window.id === 'resume' ? 'Siddhartha Goswami — Resume' : window.id.charAt(0).toUpperCase() + window.id.slice(1)}
-                initialWidth={window.id === 'about' ? 920 : window.id === 'resume' ? 900 : 800}
-                initialHeight={window.id === 'about' ? 650 : window.id === 'resume' ? 680 : 600}
+                title={window.id === 'about' ? 'About Siddhartha' : window.id === 'monitor' ? 'System Monitor' : window.id === 'resume' ? 'Siddhartha Goswami — Resume' : window.id === 'recruiter' ? 'Recruiter Brief' : window.id === 'projects' ? 'Projects' : window.id.charAt(0).toUpperCase() + window.id.slice(1)}
+                initialWidth={window.id === 'about' ? 920 : window.id === 'resume' ? 900 : window.id === 'recruiter' ? 980 : window.id === 'projects' ? 980 : 800}
+                initialHeight={window.id === 'about' ? 650 : window.id === 'resume' ? 680 : window.id === 'recruiter' ? 720 : window.id === 'projects' ? 720 : 600}
               >
                 {window.id === 'terminal' && <TerminalApp />}
                 {window.id === 'snake' && <SnakeApp />}
                 {window.id === 'resume' && <ResumeApp />}
                 {window.id === 'about' && <AboutApp />}
+                {window.id === 'recruiter' && <RecruiterApp />}
+                {window.id === 'projects' && <ProjectsApp />}
                 {window.id === 'monitor' && <SystemMonitorApp />}
-                {window.id === 'help' && <div className="p-6 text-white">Use the About app for a quick profile, Resume PDF for the full resume, and Terminal for the portfolio command line.</div>}
+                {window.id === 'help' && <div className="p-6 text-white"><h2 className="mb-3 text-lg font-semibold">Workspace shortcuts</h2><ul className="space-y-2 text-sm text-white/70"><li><b className="text-[#ff9d72]">Ctrl/Cmd + K</b> — open Activities launcher</li><li><b className="text-[#ff9d72]">R</b> — open resume</li><li><b className="text-[#ff9d72]">P</b> — open projects</li><li><b className="text-[#ff9d72]">T</b> — open terminal</li><li><b className="text-[#ff9d72]">Esc</b> — close launcher</li></ul></div>}
               </Window>
             </div>
           ))}
