@@ -37,7 +37,19 @@ The public portfolio works without environment variables. Set `JWT_SECRET` in `.
 npm run dev
 ```
 
-Open <http://localhost:3000>. The Ubuntu desktop is the first screen; click About or Resume in the dock to begin. The same command is available as `make dev`.
+Open <http://localhost:3000>. The Ubuntu desktop is the first screen; click About or Resume in the dock to begin. The same command is available as `make dev`. If port 3000 is already in use, the server automatically selects the next available port and prints the URL.
+
+To choose a port explicitly:
+
+```bash
+PORT=4173 npm run dev
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:PORT=4173; npm run dev
+```
 
 ## Checks
 

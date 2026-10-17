@@ -6,11 +6,36 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { createServer as createNetServer } from 'node:net';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET;
+
+const parsedPort = Number(process.env.PORT ?? 3000);
+const requestedPort = Number.isInteger(parsedPort) && parsedPort > 0 ? parsedPort : 3000;
+
+const findAvailablePort = async (startPort: number) => {
+  for (let port = startPort; port < startPort + 20; port += 1) {
+    const available = await new Promise<boolean>((resolve) => {
+      const probe = createNetServer();
+      probe.once('error', () => resolve(false));
+      probe.once('listening', () => probe.close(() => resolve(true)));
+      probe.listen(port, '0.0.0.0');
+    });
+
+    if (available) return port;
+  }
+
+  throw new Error(`No available port found between ${startPort} and ${startPort + 19}`);
+};
+
+const PORT = await findAvailablePort(requestedPort);
+const HMR_PORT = await findAvailablePort(PORT + 1);
+
+if (PORT !== requestedPort) {
+  console.warn(`Port ${requestedPort} is already in use; using port ${PORT} instead.`);
+}
 
 // Middleware
 app.use(express.json());
@@ -185,7 +210,7 @@ app.get('/api/resume', (req, res) => {
 // Vite Middleware
 if (process.env.NODE_ENV !== 'production') {
   const vite = await createViteServer({
-    server: { middlewareMode: true },
+    server: { middlewareMode: true, hmr: { port: HMR_PORT } },
     appType: 'spa',
   });
   app.use(vite.middlewares);
