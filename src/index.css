@@ -152,6 +152,8 @@ button { cursor: pointer; }
 .about-project-row:hover .project-expand-icon, .about-project-row.is-expanded .project-expand-icon { color: #ff9d72; transform: rotate(90deg); }
 .about-project-details { padding: 0 30px 19px 68px; }
 .about-project-details ul { margin-top: 0; }
+.about-project-row { display: block; padding: 0; }
+.about-project-toggle > div { min-width: 0; }
 .about-project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .about-project-tags span, .about-project-tags a { display: inline-flex; align-items: center; gap: 5px; padding: 5px 7px; border: 1px solid rgba(255,255,255,.13); color: #958899; font: 9px 'DM Mono', monospace; }
 .about-project-tags a { color: #ffb08d; }
