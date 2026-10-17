@@ -95,10 +95,10 @@ const recruiterSummaries: Record<string, string> = {
 const architectures: Record<string, ArchitectureStep[]> = {
   'Enterprise Knowledge Assistant': [
     { label: 'User query', detail: 'question', icon: Search },
-    { label: 'LangGraph router', detail: 'domain selection', icon: Workflow },
-    { label: 'Specialized agents', detail: 'HR · policy · precedent · general', icon: Network },
-    { label: 'Hybrid retrieval', detail: 'Neo4j · FAISS · BM25', icon: Database },
-    { label: 'Grounded answer', detail: 'citations + evaluation', icon: Check },
+    { label: 'LangGraph workflow', detail: 'domain + retrieval steps', icon: Workflow },
+    { label: 'Lexical retriever', detail: 'indexed document chunks', icon: Database },
+    { label: 'Evidence passages', detail: 'ranked source matches', icon: Network },
+    { label: 'Citation gate', detail: 'stable IDs + abstention', icon: Check },
   ],
   'Video Blog App': [
     { label: 'YouTube video', detail: 'source media', icon: Search },
