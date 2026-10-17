@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useStore } from '../../store/useStore';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
+import { achievements, experience, profile, projects, skills } from '../../content/profile';
 
 interface Command {
   input: string;
@@ -18,6 +19,15 @@ export const useTerminal = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { openWindow, closeWindow } = useStore();
 
+  const navigateHistory = (direction: 'up' | 'down') => {
+    if (commandHistory.length === 0) return '';
+    const nextIndex = direction === 'up'
+      ? Math.min(historyIndex + 1, commandHistory.length - 1)
+      : Math.max(historyIndex - 1, -1);
+    setHistoryIndex(nextIndex);
+    return nextIndex === -1 ? '' : commandHistory[commandHistory.length - 1 - nextIndex];
+  };
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -28,9 +38,16 @@ export const useTerminal = () => {
     const trimmedCmd = cmd.trim();
     if (!trimmedCmd) return;
 
+    if (trimmedCmd.toLowerCase() === 'clear') {
+      setHistory([]);
+      setInput('');
+      setHistoryIndex(-1);
+      return;
+    }
+
     const newHistory = [...history, { input: `${currentPath}$ ${trimmedCmd}`, output: '' }];
     setHistory(newHistory);
-    setCommandHistory([...commandHistory, trimmedCmd]);
+    setCommandHistory((previous) => [...previous, trimmedCmd]);
     setHistoryIndex(-1);
     setInput('');
 
@@ -49,7 +66,9 @@ export const useTerminal = () => {
               <span className="text-green-400">about</span> <span>Display information about me</span>
               <span className="text-green-400">projects</span> <span>List my projects</span>
               <span className="text-green-400">skills</span> <span>List my technical skills</span>
-              <span className="text-green-400">experience</span> <span>Show my work experience</span>
+               <span className="text-green-400">experience</span> <span>Show my work experience</span>
+               <span className="text-green-400">achievements</span> <span>Show competitive achievements</span>
+               <span className="text-green-400">project &lt;name&gt;</span> <span>Show full project details</span>
               <span className="text-green-400">contact</span> <span>Show contact information</span>
               <span className="text-green-400">resume</span> <span>Open my resume</span>
               <span className="text-green-400">snake</span> <span>Play Snake game</span>
@@ -71,20 +90,18 @@ export const useTerminal = () => {
         case 'about':
           output = (
             <div className="p-2">
-              <p>I’m Siddhartha Goswami, a Mathematics and Computing undergraduate at IIT Roorkee focused on AI engineering and intelligent systems.</p>
-              <p className="mt-2">I build scalable machine learning and agentic AI applications, with experience in multi-agent frameworks, retrieval-augmented generation, and deep learning systems.</p>
-              <p className="mt-2">I’m particularly interested in designing reliable, high-performance AI infrastructure that bridges research and real-world deployment.</p>
+              <p>{profile.intro}</p>
+              <p className="mt-2">{profile.education}</p>
             </div>
           );
           break;
         case 'projects':
-          const projRes = await axios.get('/api/projects');
           output = (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {projRes.data.map((p: any) => (
-                <div key={p.id} className="flex flex-col space-y-1">
+              {projects.map((p) => (
+                <div key={p.title} className="flex flex-col space-y-1">
                   <div className="text-blue-400 font-bold hover:underline cursor-pointer">
-                    <a href={p.link} target="_blank" rel="noreferrer">{p.name}</a>
+                    <a href={p.link} target="_blank" rel="noreferrer">{p.title}</a>
                   </div>
                   <div className="text-gray-400 text-xs">{p.description}</div>
                 </div>
@@ -93,54 +110,36 @@ export const useTerminal = () => {
           );
           break;
         case 'skills':
-          const skillRes = await axios.get('/api/skills');
           output = (
             <div className="flex flex-col space-y-4">
-              <div>
-                <span className="text-yellow-400 font-bold border-b border-yellow-500">Languages</span>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {skillRes.data.languages.map((s: string) => <span key={s} className="bg-gray-700 px-2 py-0.5 rounded text-xs">{s}</span>)}
-                </div>
-              </div>
-              <div>
-                <span className="text-green-400 font-bold border-b border-green-500">Machine Learning & AI</span>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {skillRes.data.machine_learning.map((s: string) => <span key={s} className="bg-gray-700 px-2 py-0.5 rounded text-xs">{s}</span>)}
-                </div>
-              </div>
-              <div>
-                <span className="text-blue-400 font-bold border-b border-blue-500">Generative AI</span>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {skillRes.data.generative_ai.map((s: string) => <span key={s} className="bg-gray-700 px-2 py-0.5 rounded text-xs">{s}</span>)}
-                </div>
-              </div>
-              <div>
-                <span className="text-purple-400 font-bold border-b border-purple-500">Development & Tools</span>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {skillRes.data.development.map((s: string) => <span key={s} className="bg-gray-700 px-2 py-0.5 rounded text-xs">{s}</span>)}
-                </div>
-              </div>
+              {Object.entries(skills).map(([group, groupSkills]) => <div key={group}><span className="text-yellow-400 font-bold border-b border-yellow-500">{group}</span><div className="flex flex-wrap gap-2 mt-1">{groupSkills.map((s) => <span key={s} className="bg-gray-700 px-2 py-0.5 rounded text-xs">{s}</span>)}</div></div>)}
             </div>
           );
           break;
         case 'experience':
-          const expRes = await axios.get('/api/experience');
           output = (
             <div className="flex flex-col space-y-6 border-l-2 border-gray-600 pl-4">
-              {expRes.data.map((exp: any) => (
-                <div key={exp.id} className="relative">
+              <div className="relative">
                   <div className="absolute -left-[21px] top-1 w-3 h-3 bg-gray-600 rounded-full border-2 border-[#300A24]"></div>
                   <div className="flex flex-col">
-                    <span className="text-[#E95420] font-bold text-lg">{exp.role}</span>
-                    <span className="text-blue-300 font-medium">{exp.organization}</span>
-                    <span className="text-gray-500 text-xs italic mb-1">{exp.period}</span>
-                    <p className="text-gray-300 text-sm">{exp.description}</p>
+                    <span className="text-[#E95420] font-bold text-lg">{experience.role}</span>
+                    <span className="text-blue-300 font-medium">{experience.organization}</span>
+                    <span className="text-gray-500 text-xs italic mb-1">{experience.period}</span>
+                    {experience.bullets.map((bullet) => <p key={bullet} className="text-gray-300 text-sm">– {bullet}</p>)}
                   </div>
-                </div>
-              ))}
+              </div>
             </div>
           );
           break;
+        case 'achievements':
+          output = <div className="flex flex-col space-y-2">{achievements.map(([metric, detail]) => <div key={metric}><span className="text-[#E95420] font-bold">{metric}</span> — {detail}</div>)}</div>;
+          break;
+        case 'project': {
+          const query = args.join(' ').toLowerCase();
+          const project = projects.find((item) => item.title.toLowerCase().includes(query) || item.number === query);
+          output = project ? <div><div className="text-[#E95420] font-bold">{project.title}</div>{project.highlights.map((highlight) => <p key={highlight} className="mt-1">– {highlight}</p>)}</div> : <span className="text-red-500">project: no matching project. Try `project enterprise`, `project video`, or `project flix`.</span>;
+          break;
+        }
         case 'contact':
           const contactRes = await axios.get('/api/contact');
           output = (
@@ -190,20 +189,19 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso
               <div className="flex flex-col justify-center space-y-1">
                 <div className="font-bold text-[#E95420]">guest@portfolio</div>
                 <div>-----------------</div>
-                <div><span className="text-[#E95420] font-bold">OS</span>: Ubuntu 22.04 LTS (Web)</div>
-                <div><span className="text-[#E95420] font-bold">Host</span>: Browser</div>
-                <div><span className="text-[#E95420] font-bold">Kernel</span>: React 19.0.0</div>
-                <div><span className="text-[#E95420] font-bold">Uptime</span>: Just now</div>
-                <div><span className="text-[#E95420] font-bold">Packages</span>: npm</div>
-                <div><span className="text-[#E95420] font-bold">Shell</span>: zsh</div>
+                 <div><span className="text-[#E95420] font-bold">OS</span>: Ubuntu-inspired portfolio</div>
+                 <div><span className="text-[#E95420] font-bold">Host</span>: Browser</div>
+                 <div><span className="text-[#E95420] font-bold">Mode</span>: Interactive simulation</div>
+                 <div><span className="text-[#E95420] font-bold">Focus</span>: AI systems + intelligent automation</div>
+                 <div><span className="text-[#E95420] font-bold">Shell</span>: portfolio-shell</div>
                 <div><span className="text-[#E95420] font-bold">Resolution</span>: {window.innerWidth}x{window.innerHeight}</div>
                 <div><span className="text-[#E95420] font-bold">DE</span>: GNOME (Simulated)</div>
                 <div><span className="text-[#E95420] font-bold">WM</span>: Framer Motion</div>
                 <div><span className="text-[#E95420] font-bold">Theme</span>: Yaru-dark</div>
                 <div><span className="text-[#E95420] font-bold">Icons</span>: Lucide React</div>
                 <div><span className="text-[#E95420] font-bold">Terminal</span>: React Terminal</div>
-                <div><span className="text-[#E95420] font-bold">CPU</span>: Virtual Core</div>
-                <div><span className="text-[#E95420] font-bold">Memory</span>: Enough</div>
+                 <div><span className="text-[#E95420] font-bold">Projects</span>: {projects.length}</div>
+                 <div><span className="text-[#E95420] font-bold">Metrics</span>: Resume-backed</div>
                 <div className="flex space-x-1 mt-2">
                   <div className="w-3 h-3 bg-black"></div>
                   <div className="w-3 h-3 bg-red-500"></div>
@@ -227,10 +225,9 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso
               </div>
             );
           } else if (currentPath === '~/projects') {
-            const pRes = await axios.get('/api/projects');
             output = (
               <div className="grid grid-cols-2 gap-2 text-white">
-                {pRes.data.map((p: any) => <span key={p.id}>{p.name}</span>)}
+                {projects.map((p) => <span key={p.title}>{p.number} {p.title}</span>)}
               </div>
             );
           }
@@ -285,6 +282,7 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso
     input,
     setInput,
     handleCommand,
+    navigateHistory,
     scrollRef,
     currentPath,
     isLoading

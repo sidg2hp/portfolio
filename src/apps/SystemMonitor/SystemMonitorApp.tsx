@@ -1,164 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
-import { Cpu, HardDrive, Network, MemoryStick } from 'lucide-react';
+import React, { useState } from 'react';
+import { Activity, BarChart3, BriefcaseBusiness, CheckCircle2, Database, Gauge, Network, Trophy } from 'lucide-react';
+import { achievements, experience, projects } from '../../content/profile';
 
-const generateData = (length: number) => {
-  return Array.from({ length }, (_, i) => ({
-    time: i,
-    value: Math.floor(Math.random() * 30) + 10,
-  }));
-};
+type MonitorTab = 'metrics' | 'systems' | 'timeline';
 
 export const SystemMonitorApp: React.FC = () => {
-  const [cpuData, setCpuData] = useState(generateData(20));
-  const [ramData, setRamData] = useState(generateData(20));
-  const [netData, setNetData] = useState(generateData(20));
-  const [activeTab, setActiveTab] = useState<'resources' | 'processes'>('resources');
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCpuData(prev => [...prev.slice(1), { time: prev[prev.length - 1].time + 1, value: Math.min(100, Math.max(5, prev[prev.length - 1].value + (Math.random() * 20 - 10))) }]);
-      setRamData(prev => [...prev.slice(1), { time: prev[prev.length - 1].time + 1, value: Math.min(100, Math.max(20, prev[prev.length - 1].value + (Math.random() * 10 - 5))) }]);
-      setNetData(prev => [...prev.slice(1), { time: prev[prev.length - 1].time + 1, value: Math.max(0, Math.random() * 100) }]);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const currentCpu = Math.round(cpuData[cpuData.length - 1].value);
-  const currentRam = Math.round(ramData[ramData.length - 1].value);
-  const currentNet = Math.round(netData[netData.length - 1].value);
+  const [activeTab, setActiveTab] = useState<MonitorTab>('metrics');
 
   return (
-    <div className="h-full bg-[#FAFAFA] text-[#333333] flex flex-col font-sans">
-      {/* Header */}
-      <div className="h-12 bg-[#F0F0F0] border-b border-[#DCDCDC] flex items-center px-4 space-x-6">
-        <button 
-          onClick={() => setActiveTab('resources')}
-          className={`h-full border-b-2 px-2 font-medium text-sm transition-colors ${activeTab === 'resources' ? 'border-[#E95420] text-[#E95420]' : 'border-transparent text-gray-600 hover:text-gray-800'}`}
-        >
-          Resources
-        </button>
-        <button 
-          onClick={() => setActiveTab('processes')}
-          className={`h-full border-b-2 px-2 font-medium text-sm transition-colors ${activeTab === 'processes' ? 'border-[#E95420] text-[#E95420]' : 'border-transparent text-gray-600 hover:text-gray-800'}`}
-        >
-          Processes
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#FAFAFA]">
-        {activeTab === 'resources' ? (
-          <>
-            {/* CPU Section */}
-            <div className="bg-white rounded-lg border border-[#DCDCDC] p-4 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-2">
-                  <Cpu className="text-[#E95420]" size={20} />
-                  <span className="font-bold text-lg">CPU History</span>
-                </div>
-                <span className="text-2xl font-light">{currentCpu}%</span>
-              </div>
-              <div className="h-48 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={cpuData}>
-                    <defs>
-                      <linearGradient id="colorCpu" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#E95420" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#E95420" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="time" hide />
-                    <YAxis domain={[0, 100]} hide />
-                    <Tooltip contentStyle={{ backgroundColor: '#333', color: '#fff', borderRadius: '4px', border: 'none' }} itemStyle={{ color: '#fff' }} />
-                    <Area type="monotone" dataKey="value" stroke="#E95420" fillOpacity={1} fill="url(#colorCpu)" strokeWidth={2} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* RAM & Network Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* RAM Section */}
-              <div className="bg-white rounded-lg border border-[#DCDCDC] p-4 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-2">
-                    <MemoryStick className="text-[#772953]" size={20} />
-                    <span className="font-bold text-lg">Memory</span>
-                  </div>
-                  <span className="text-2xl font-light">{currentRam}%</span>
-                </div>
-                <div className="h-32 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={ramData}>
-                      <XAxis dataKey="time" hide />
-                      <YAxis domain={[0, 100]} hide />
-                      <Line type="monotone" dataKey="value" stroke="#772953" strokeWidth={2} dot={false} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="mt-2 text-xs text-gray-500 text-center">
-                  16.0 GiB Total • {((currentRam / 100) * 16).toFixed(1)} GiB Used
-                </div>
-              </div>
-
-              {/* Network Section */}
-              <div className="bg-white rounded-lg border border-[#DCDCDC] p-4 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-2">
-                    <Network className="text-[#2C001E]" size={20} />
-                    <span className="font-bold text-lg">Network</span>
-                  </div>
-                  <span className="text-2xl font-light">{currentNet} KB/s</span>
-                </div>
-                <div className="h-32 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={netData}>
-                      <XAxis dataKey="time" hide />
-                      <YAxis hide />
-                      <Line type="monotone" dataKey="value" stroke="#2C001E" strokeWidth={2} dot={false} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="mt-2 text-xs text-gray-500 text-center">
-                  Total Received: 1.2 GiB • Total Sent: 450 MiB
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="bg-white rounded-lg border border-[#DCDCDC] overflow-hidden shadow-sm">
-            <table className="w-full text-sm text-left">
-              <thead className="bg-[#F5F5F5] text-gray-600 font-medium border-b border-[#DCDCDC]">
-                <tr>
-                  <th className="py-2 px-4">Process Name</th>
-                  <th className="py-2 px-4">User</th>
-                  <th className="py-2 px-4">% CPU</th>
-                  <th className="py-2 px-4">ID</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#E5E5E5]">
-                {[
-                  { name: 'gnome-shell', user: 'guest', cpu: 12.5, id: 1042 },
-                  { name: 'firefox', user: 'guest', cpu: 8.2, id: 2104 },
-                  { name: 'node', user: 'guest', cpu: 4.1, id: 3021 },
-                  { name: 'Xorg', user: 'root', cpu: 2.8, id: 982 },
-                  { name: 'systemd', user: 'root', cpu: 0.1, id: 1 },
-                  { name: 'kworker', user: 'root', cpu: 0.0, id: 45 },
-                ].map((proc) => (
-                  <tr key={proc.id} className="hover:bg-[#F9F9F9]">
-                    <td className="py-2 px-4 font-medium">{proc.name}</td>
-                    <td className="py-2 px-4 text-gray-500">{proc.user}</td>
-                    <td className="py-2 px-4 text-[#E95420]">{proc.cpu}%</td>
-                    <td className="py-2 px-4 text-gray-400">{proc.id}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <div className="portfolio-monitor">
+      <header className="monitor-header">
+        <div><p>PORTFOLIO MONITOR / EVIDENCE MODE</p><h1>What shipped, measured.</h1></div>
+        <span className="monitor-live"><i /> live profile</span>
+      </header>
+      <nav className="monitor-tabs" aria-label="Portfolio monitor sections">
+        {([['metrics', 'Impact metrics'], ['systems', 'Systems'], ['timeline', 'Experience & proof']] as const).map(([id, label]) => <button key={id} className={activeTab === id ? 'is-active' : ''} onClick={() => setActiveTab(id)}>{label}</button>)}
+      </nav>
+      <div className="monitor-content">
+        {activeTab === 'metrics' && <>
+          <div className="monitor-note"><Activity size={17} /> This is a portfolio dashboard, not host telemetry. Every figure below comes from Siddhartha’s project work.</div>
+          <div className="monitor-metric-grid">
+            <Metric icon={<Database size={19} />} value="5.7M+" label="ratings in FlixPulse" detail="21K+ users · 1.2K+ movies" />
+            <Metric icon={<Gauge size={19} />} value="0.743" label="MAP@10" detail="NDCG@10 = 0.834" />
+            <Metric icon={<BarChart3 size={19} />} value="99.96%" label="user coverage" detail="cold-start fallbacks included" />
+            <Metric icon={<Trophy size={19} />} value="3×" label="hackathon winner" detail="innovative technology solutions" />
           </div>
-        )}
+          <div className="monitor-metric-table"><div className="monitor-table-head"><span>Signal</span><span>Source</span><span>Status</span></div>{[['Hybrid retrieval', 'Hiring Bazaar AI', 'deployed'], ['GraphRAG + evaluation', 'Enterprise Knowledge Assistant', 'tested'], ['Transcript RAG', 'Video Blog App', 'shipped'], ['Collaborative filtering', 'FlixPulse', 'evaluated']].map(([signal, source, status]) => <div className="monitor-table-row" key={signal}><span>{signal}</span><span>{source}</span><b><CheckCircle2 size={13} /> {status}</b></div>)}</div>
+        </>}
+        {activeTab === 'systems' && <div className="monitor-system-list">{projects.map((project) => <article key={project.title}><div className="monitor-system-icon"><Network size={18} /></div><div><p>{project.type}</p><h2>{project.title}</h2><span>{project.description}</span><div>{project.stack.map((stack) => <em key={stack}>{stack}</em>)}</div></div><span className="monitor-index">{project.number}</span></article>)}</div>}
+        {activeTab === 'timeline' && <div className="monitor-timeline"><article className="monitor-timeline-card"><BriefcaseBusiness size={19} /><div><p>{experience.period}</p><h2>{experience.role} · {experience.organization}</h2>{experience.bullets.map((bullet) => <span key={bullet}>{bullet}</span>)}</div></article><div className="monitor-achievements">{achievements.map(([metric, detail]) => <div key={metric}><strong>{metric}</strong><span>{detail}</span></div>)}</div></div>}
       </div>
     </div>
   );
 };
+
+const Metric: React.FC<{ icon: React.ReactNode; value: string; label: string; detail: string }> = ({ icon, value, label, detail }) => <article className="monitor-metric"><div className="monitor-metric-icon">{icon}</div><strong>{value}</strong><span>{label}</span><small>{detail}</small></article>;

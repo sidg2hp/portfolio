@@ -3,7 +3,7 @@ import { useTerminal } from './useTerminal';
 import { Loader2 } from 'lucide-react';
 
 export const TerminalApp: React.FC = () => {
-  const { history, input, setInput, handleCommand, scrollRef, currentPath, isLoading } = useTerminal();
+  const { history, input, setInput, handleCommand, scrollRef, currentPath, isLoading, navigateHistory } = useTerminal();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -14,6 +14,14 @@ export const TerminalApp: React.FC = () => {
     if (e.key === 'Enter' && !isLoading) {
       handleCommand(input);
     }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setInput(navigateHistory('up'));
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setInput(navigateHistory('down'));
+    }
   };
 
   return (
@@ -23,12 +31,10 @@ export const TerminalApp: React.FC = () => {
       ref={scrollRef}
     >
       <div className="mb-2 text-gray-400">
-        Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-101-generic x86_64) <br />
-        * Documentation:  https://help.ubuntu.com <br />
-        * Management:     https://landscape.canonical.com <br />
-        * Support:        https://ubuntu.com/advantage <br />
-        <br />
-        Type 'help' to see available commands.
+         Welcome to Siddhartha&apos;s Ubuntu-inspired portfolio workspace <br />
+         * This is a simulated terminal for exploring the portfolio <br />
+         * Type &apos;help&apos; to see available commands <br />
+         <br />
       </div>
 
       {history.map((entry, index) => (
