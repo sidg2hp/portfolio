@@ -69,11 +69,22 @@ export const AboutApp: React.FC = () => {
         </div>
       </section>
 
-      <section className="about-proof-strip">
-        <div><strong>5.7M+</strong><span>ratings in FlixPulse</span></div>
-        <div><strong>21K+</strong><span>users modeled</span></div>
-        <div><strong>1.2K+</strong><span>movies modeled</span></div>
-        <div><strong>3×</strong><span>hackathon winner</span></div>
+      <section className="about-snapshot" aria-label="Portfolio snapshot">
+        <div className="about-snapshot-heading"><p className="about-kicker">AT A GLANCE / 02</p><span>Choose a thread to explore</span></div>
+        <div className="about-snapshot-grid">
+          <button className="about-snapshot-card" onClick={() => scrollToSection('projects')}>
+            <span className="snapshot-label">FOCUS</span><strong>Generative AI</strong><span>Agentic systems · RAG · Machine Learning</span><b>Explore work <ArrowUpRight size={13} /></b>
+          </button>
+          <button className="about-snapshot-card" onClick={() => scrollToSection('experience')}>
+            <span className="snapshot-label">EXPERIENCE</span><strong>AI Engineering Intern</strong><span>Hiring Bazaar AI · hybrid retrieval</span><b>See the timeline <ArrowUpRight size={13} /></b>
+          </button>
+          <button className="about-snapshot-card" onClick={() => scrollToSection('projects')}>
+            <span className="snapshot-label">RESULT</span><strong>99.96% coverage</strong><span>FlixPulse · 5.7M+ ratings · MAP@10 0.743</span><b>See the system <ArrowUpRight size={13} /></b>
+          </button>
+          <button className="about-snapshot-card" onClick={() => scrollToSection('achievements')}>
+            <span className="snapshot-label">RECOGNITION</span><strong>3× Hackathon Winner</strong><span>Codeforces Expert · maximum rating 1607</span><b>View proof <ArrowUpRight size={13} /></b>
+          </button>
+        </div>
       </section>
 
       <section className="about-section-block" id="about-experience">
