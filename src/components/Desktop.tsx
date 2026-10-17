@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStore } from '../store/useStore';
 import { TopBar } from './TopBar';
 import { Dock } from './Dock';
@@ -8,31 +8,12 @@ import { SnakeApp } from '../apps/Snake/SnakeApp';
 import { ResumeApp } from '../apps/Resume/ResumeApp';
 import { AboutApp } from '../apps/About/AboutApp';
 import { SystemMonitorApp } from '../apps/SystemMonitor/SystemMonitorApp';
-import { BootScreen } from './BootScreen';
-import { LockScreen } from './LockScreen';
 import { DesktopIcon } from './DesktopIcon';
 import { motion, AnimatePresence } from 'motion/react';
-import { FileText, Terminal, User, Activity } from 'lucide-react';
+import { ArrowLeft, FileText, Terminal, User, Activity } from 'lucide-react';
 
-export const Desktop: React.FC = () => {
-  const { windows, booted, locked, setBooted, setLocked, openWindow } = useStore();
-
-  useEffect(() => {
-    // Simulate boot sequence
-    const timer = setTimeout(() => {
-      setBooted(true);
-      setLocked(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [setBooted, setLocked]);
-
-  if (!booted) {
-    return <BootScreen />;
-  }
-
-  if (locked) {
-    return <LockScreen onUnlock={() => setLocked(false)} />;
-  }
+export const Desktop: React.FC<{ onExit?: () => void }> = ({ onExit }) => {
+  const { windows, openWindow } = useStore();
 
   return (
     <div className="h-screen w-screen bg-cover bg-center overflow-hidden select-none font-sans relative"
@@ -43,6 +24,15 @@ export const Desktop: React.FC = () => {
 
       <TopBar />
       <Dock />
+
+      {onExit && (
+        <button
+          onClick={onExit}
+          className="absolute right-4 bottom-4 z-50 flex items-center gap-2 rounded-full border border-white/20 bg-[#1E1E1E]/90 px-4 py-2 text-xs font-medium text-white shadow-xl backdrop-blur-md transition-colors hover:border-[#c7ed72]/60 hover:text-[#c7ed72]"
+        >
+          <ArrowLeft size={14} /> Back to portfolio
+        </button>
+      )}
 
       {/* Desktop Icons - Left side */}
       <div className="absolute top-10 left-20 flex flex-col gap-4 p-4 z-0">

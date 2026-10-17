@@ -11,7 +11,7 @@ import PDFDocument from 'pdfkit';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'ubuntu-secret-key-change-me';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware
 app.use(express.json());
@@ -36,82 +36,44 @@ db.exec(`
 const PROJECTS = [
   {
     id: 1,
-    name: "deep-research-agent",
-    title: "Deep Research Dual-Agent System",
-    description: "Autonomous multi-agent system coordinating Researcher and Writer agents for end-to-end research automation.",
-    tech: ["Python", "LangGraph", "Tavily API", "Streamlit"],
-    link: "https://github.com/sidg2hp/Deep-Research-Agent"
+    name: "enterprise-knowledge-assistant",
+    title: "Enterprise Knowledge Assistant",
+    description: "Multi-agent enterprise search and decision-support system with domain routing, hybrid GraphRAG retrieval, and traceable evaluation.",
+    tech: ["Python", "LangGraph", "Neo4j", "FAISS", "BM25", "FastAPI"],
+    link: "https://github.com/sidg2hp"
   },
   {
     id: 2,
-    name: "pdf-rag-system",
-    title: "PDF-Based RAG System",
-    description: "Scalable semantic search system over technical PDFs using vector embeddings and FAISS indexing.",
-    tech: ["LangChain", "FAISS", "DeepSeek", "DeepSeek-R1-14B"],
-    link: "https://github.com/sidg2hp/PDF-RAG-System"
+    name: "video-blog-app",
+    title: "Video Blog App",
+    description: "Full-stack AI platform automating YouTube ingestion, audio extraction, transcription, transcript RAG, and long-form article generation.",
+    tech: ["Django", "AssemblyAI", "Ollama", "FFmpeg", "yt-dlp", "RAG"],
+    link: "https://github.com/sidg2hp"
   },
   {
     id: 3,
-    name: "satellite-imagery-analysis",
-    title: "Multimodal Satellite Imagery Analysis",
-    description: "Multimodal ML pipeline combining satellite imagery (CNNs) with structured housing data.",
-    tech: ["PyTorch", "CNNs", "Pandas"],
-    link: "https://github.com/sidg2hp/Satellite-Imagery-Analysis"
+    name: "flixpulse",
+    title: "FlixPulse: Personalized Recommendation Engine",
+    description: "Recommendation system over 5.7M+ ratings using SVD matrix factorization, item-based collaborative filtering, and cold-start fallbacks.",
+    tech: ["Python", "FastAPI", "React", "SVD", "KNN", "scikit-learn"],
+    link: "https://github.com/sidg2hp"
   },
-  {
-    id: 4,
-    name: "netsentinel-proxy",
-    title: "NetSentinel: Network Proxy Server",
-    description: "High-performance, multi-threaded HTTP/HTTPS proxy server using low-level socket APIs.",
-    tech: ["C++", "Socket Programming", "Linux"],
-    link: "https://github.com/sidg2hp/NetSentinel"
-  },
-  {
-    id: 5,
-    name: "stock-sentiment-analysis",
-    title: "Stock Market Sentiment Analysis",
-    description: "Analyzed sentiment from 10,000+ financial news articles to predict stock movements with 85% accuracy.",
-    tech: ["Python", "spaCy", "Scikit-learn"],
-    link: "https://github.com/sidg2hp/Stock-Sentiment-Analysis"
-  },
-  {
-    id: 6,
-    name: "ai-blog-generator",
-    title: "AI Blog Generator",
-    description: "Full-stack system converting YouTube videos into structured blog posts using LLMs.",
-    tech: ["Django", "AssemblyAI", "Tailwind CSS"],
-    link: "https://github.com/sidg2hp/AI-Blog-Generator"
-  }
 ];
 
 const SKILLS = {
-  languages: ["Python", "C++", "SQL", "JavaScript", "Solidity", "HTML", "CSS"],
-  machine_learning: ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "OpenCV", "NLTK", "spaCy"],
-  generative_ai: ["LangChain", "LangGraph", "RAG", "FAISS", "Ollama", "DeepSeek Models"],
-  development: ["Django", "Streamlit", "React", "Tailwind CSS", "Docker", "Git", "Linux/WSL"]
+  languages: ["Python", "C++", "SQL", "JavaScript/TypeScript"],
+  machine_learning: ["PyTorch", "Pandas", "NumPy", "Scikit-learn", "XGBoost", "Transformers", "CNNs", "RNNs/LSTMs"],
+  generative_ai: ["LLMs", "RAG", "GraphRAG", "LangChain", "LangGraph", "FAISS", "BM25", "Neo4j", "Ollama", "Agentic AI"],
+  development: ["FastAPI", "Django", "REST APIs", "PostgreSQL", "Docker", "Git", "AWS (S3, Rekognition)", "Linux/WSL"]
 };
 
 const EXPERIENCE = [
   {
     id: 1,
-    role: "Coordinator",
-    organization: "Placement & Internship Cell, IIT Roorkee",
-    period: "Jul 2024 – Present",
-    description: "Coordinating placement and internship activities for the institute."
-  },
-  {
-    id: 2,
-    role: "Editor",
-    organization: "WatchOut! (Campus Media Body)",
-    period: "Dec 2024 – Present",
-    description: "Editorial role in the official campus media body of IIT Roorkee."
-  },
-  {
-    id: 3,
-    role: "Editor",
-    organization: "Kshitij (Literary Magazine)",
-    period: "Dec 2024 – Present",
-    description: "Editorial role in the literary magazine of IIT Roorkee."
+    role: "AI Engineering Intern",
+    organization: "Hiring Bazaar AI",
+    period: "Apr 2026 – Jun 2026",
+    description: "Built and deployed a resume parsing and hybrid retrieval pipeline using BM25 and dense vectors for automated candidate screening."
   }
 ];
 
@@ -124,6 +86,8 @@ const CONTACT = {
 
 // --- Auth Middleware ---
 const authenticateToken = (req, res, next) => {
+  if (!JWT_SECRET) return res.status(503).json({ error: "Authentication is not configured" });
+
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -154,6 +118,8 @@ app.post('/api/auth/register', async (req, res) => {
 });
 
 app.post('/api/auth/login', async (req, res) => {
+  if (!JWT_SECRET) return res.status(503).json({ error: "Authentication is not configured" });
+
   const { username, password } = req.body;
   const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username) as any;
 
@@ -279,14 +245,12 @@ app.get('/api/resume', (req, res) => {
   doc.moveDown(1);
 
   // Achievements
-  doc.fontSize(14).font('Helvetica-Bold').text('ACHIEVEMENTS & CERTIFICATIONS', { underline: true });
+  doc.fontSize(14).font('Helvetica-Bold').text('ACHIEVEMENTS & COMPETITIVE PROGRAMMING', { underline: true });
   doc.moveDown(0.5);
   const achievements = [
-    "AIR 1489 in JEE Advanced 2023 among 160,000+ candidates",
-    "AIR 841 in KVPY 2020 (Kishore Vaigyanik Protsahan Yojana)",
-    "Machine Learning Specialization — Andrew Ng (Stanford University, Coursera)",
-    "Introduction to Generative AI — Google Cloud Skills Boost",
-    "Summer Analytics 2024 — IIT Guwahati (Machine Learning Workshop)"
+    "AIR 1489 in JEE Advanced 2023 — top 0.05% among ~180,000 candidates",
+    "AIR 841 in KVPY SA 2020 — National Science Fellowship (DST, Government of India)",
+    "Codeforces: sisyphus_7 — Rated Expert (maximum rating 1607)"
   ];
   
   achievements.forEach(ach => {

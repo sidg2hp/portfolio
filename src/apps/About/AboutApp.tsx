@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { User, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { useStore } from '../../store/useStore';
+import { profile } from '../../content/profile';
 
 export const AboutApp: React.FC = () => {
   const { openWindow } = useStore();
@@ -21,30 +22,30 @@ export const AboutApp: React.FC = () => {
             </div>
           </div>
           <h1 className="text-3xl font-bold mb-2">Siddhartha Goswami</h1>
-          <p className="text-[#E95420] font-medium">Mathematics and Computing Undergraduate</p>
-          <p className="text-gray-400 text-sm mt-1">IIT Roorkee</p>
+          <p className="text-[#E95420] font-medium">{profile.role}</p>
+          <p className="text-gray-400 text-sm mt-1">{profile.education}</p>
         </div>
 
         <div className="space-y-6 text-gray-300 leading-relaxed text-center">
           <p>
-            I’m a Mathematics and Computing undergraduate at IIT Roorkee focused on AI engineering and intelligent systems.
+             I’m a Mathematics and Computing undergraduate at IIT Roorkee focused on Generative AI, Agentic Systems, RAG, and Machine Learning.
           </p>
           <p>
-            I build scalable machine learning and agentic AI applications, with experience in multi-agent frameworks, retrieval-augmented generation, and deep learning systems.
+             I build end-to-end AI products across enterprise search, intelligent automation, and personalization.
           </p>
           <p>
-            I’m particularly interested in designing reliable, high-performance AI infrastructure that bridges research and real-world deployment.
+             I’m particularly interested in reliable AI systems that bridge research and real-world deployment.
           </p>
         </div>
 
         <div className="mt-8 pt-8 border-t border-white/10 flex justify-center space-x-6">
-          <a href="https://github.com/sidg2hp" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#E95420] transition-colors transform hover:scale-110" title="GitHub">
+           <a href={profile.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#E95420] transition-colors transform hover:scale-110" title="GitHub">
             <Github size={24} />
           </a>
-          <a href="https://www.linkedin.com/in/siddhartha-goswami-1a83681b2/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#0077B5] transition-colors transform hover:scale-110" title="LinkedIn">
+           <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#0077B5] transition-colors transform hover:scale-110" title="LinkedIn">
             <Linkedin size={24} />
           </a>
-          <a href="mailto:sidgos010304@gmail.com" className="text-gray-400 hover:text-[#EA4335] transition-colors transform hover:scale-110" title="Email">
+           <a href={`mailto:${profile.email}`} className="text-gray-400 hover:text-[#EA4335] transition-colors transform hover:scale-110" title="Email">
             <Mail size={24} />
           </a>
           <button onClick={() => openWindow('resume')} className="text-gray-400 hover:text-green-500 transition-colors transform hover:scale-110" title="Resume">

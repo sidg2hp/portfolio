@@ -11,19 +11,19 @@ export const ResumeApp: React.FC = () => {
             <span className="font-medium text-sm">resume.pdf</span>
           </div>
           <a
-            href="https://drive.google.com/file/d/1SToRZMzHtBUlrahoanp_g4eIlESEfkWG/view?usp=sharing"
+            href="/api/resume"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-1 bg-[#E95420] hover:bg-[#C74215] px-3 py-1.5 rounded text-xs font-bold transition-colors"
           >
             <Download size={14} />
-            <span>Open in Drive</span>
+            <span>Open resume</span>
           </a>
         </div>
 
         <div className="flex-1 bg-gray-100 overflow-auto flex justify-center p-8">
           <iframe
-            src="https://drive.google.com/file/d/1SToRZMzHtBUlrahoanp_g4eIlESEfkWG/preview"
+            src="/api/resume"
             className="w-full h-full border border-gray-300 shadow-lg"
             title="Resume PDF"
             allow="autoplay"

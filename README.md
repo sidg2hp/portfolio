@@ -1,114 +1,90 @@
-# Ubuntu-themed Portfolio Website 🖥️
+# Siddhartha Goswami · Portfolio
 
-A production-ready portfolio website inspired by Ubuntu Linux (modern GNOME desktop style). It simulates a real Ubuntu desktop inside the browser, complete with a functional terminal, applications, games, and a modern UI.
+A fast, responsive portfolio for Siddhartha Goswami, an AI/ML engineer and Mathematics & Computing undergraduate at IIT Roorkee. The primary experience is a recruiter-friendly case-study site; the original Ubuntu desktop, terminal, resume viewer, and Snake game remain available as an optional interactive mode.
 
+## What is included
 
-## 🌟 Features
+- Immediate hero section with clear positioning, resume access, and contact links.
+- Resume-led project stories for Enterprise Knowledge Assistant, Video Blog App, and FlixPulse.
+- Experience, skills, education, competitive programming, and achievement sections.
+- Responsive layout with keyboard-friendly navigation and a mobile menu.
+- Optional Ubuntu desktop mode with Terminal, Resume, About, System Monitor, and Snake apps.
+- Express API for the terminal data, generated resume PDF, and Snake high scores.
 
-*   **Ubuntu Desktop Environment:**
-    *   Authentic boot splash screen and lock screen.
-    *   Classic GNOME-like desktop layout with a left vertical dock and top bar containing system icons (time, battery, network).
-    *   Draggable, minimizable, and maximizable windows with smooth Framer Motion animations.
-    *   Yaru dark theme with standard Ubuntu orange accents (`#E95420`).
-*   **Functional Terminal App (`Terminal`):**
-    *   Realistic GNOME terminal UI with a `guest@portfolio:~$` prompt and blinking cursor.
-    *   Command history navigation (↑ ↓) and tab autocomplete.
-    *   Built-in commands: `help`, `about`, `projects`, `skills`, `experience`, `contact`, `clear`, `ls`, `cd`, `cat`, `resume`, `snake`, `neofetch`, `whoami`, `exit`.
-    *   Dynamic data fetching from backend APIs for projects, skills, and experience.
-    *   `neofetch` displays a customized Ubuntu ASCII logo with portfolio data.
-*   **System Monitor:** 
-    *   Simulates real-time CPU, RAM, and Network usage with live-updating charts.
-*   **Games & Fun (`Snake`):**
-    *   Playable retro pixel-style snake game accessible via terminal (`snake`) or dock.
-    *   Global high score tracking powered by SQLite.
-*   **Resume Integration:**
-    *   Dedicated app to view and download your resume.
-    *   Uses a Google Drive embedded PDF viewer for high-quality rendering.
-*   **User Authentication System:**
-    *   JWT-based authentication with bcrypt for secure login/logout features.
+## Stack
 
-## 🛠️ Tech Stack
+- React 19 + TypeScript + Vite
+- Tailwind CSS v4 and Motion for styling and animation
+- Express + `tsx` for the full-stack development/production server
+- SQLite via `better-sqlite3` for optional game/auth data
+- Node.js `24.21.0` (pinned in `.nvmrc`)
 
-**Frontend:**
-*   **React 19**
-*   **Vite** (Build Tool)
-*   **TailwindCSS** (Styling & Yaru Theme)
-*   **Framer Motion** (Window management, dragging, and animations)
-*   **Zustand** (Global state management)
-*   **Lucide React** (Icons)
-*   **Recharts** (System Monitor graphs)
+## Setup
 
-**Backend:**
-*   **Express.js** (Node.js framework)
-*   **Better-SQLite3** (Database for high scores and users)
-*   **JSON Web Token (JWT)** & **Bcrypt.js** (Authentication)
-*   **PDFKit** (For dynamic PDF generation if needed)
+Prerequisites: Node.js 24.21.0 and npm.
 
-## 🚀 Setting Up Locally
+```bash
+git clone https://github.com/sidg2hp/portfolio.git
+cd ubuntu-portfolio
+npm ci
+cp .env.example .env
+```
 
-### Prerequisites
-*   [Node.js](https://nodejs.org/) (v18+ recommended)
-*   Git
+The public portfolio works without environment variables. Set `JWT_SECRET` in `.env` if you use the optional authentication endpoints.
 
-### Installation Steps
+## Run locally
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/sidg2hp/portfolio.git
-    cd portfolio
-    ```
+```bash
+npm run dev
+```
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+Open <http://localhost:3000>. The same command is available as `make dev`.
 
-3.  **Environment Variables:**
-    Create a `.env` file in the root directory and add a secret key for JWT authentication:
-    ```env
-    JWT_SECRET=your_super_secret_jwt_key_here
-    ```
+## Checks
 
-4.  **Run the application (Development Mode):**
-    ```bash
-    npm run dev
-    ```
-    This will start the full-stack server using `tsx` at `http://localhost:3000`.
+The repository has one offline-friendly test command. It typechecks the complete TypeScript project and creates a production Vite bundle:
 
-## 📦 Building for Production
+```bash
+npm test
+```
 
-To build the optimized production assets:
+Equivalent Make target:
+
+```bash
+make test
+```
+
+## Production build and run
+
 ```bash
 npm run build
+NODE_ENV=production npm run start
 ```
 
-To run the production server:
+The production server serves the built frontend and API on port 3000. On Windows PowerShell, use `$env:NODE_ENV="production"; npm run start`.
+
+## Docker
+
+The Dockerfile pins the Node image, installs the lockfile dependencies, builds the frontend, and runs the Express server:
+
 ```bash
-npm run start
+docker build -t siddhartha-portfolio .
+docker run --rm -p 3000:3000 siddhartha-portfolio
 ```
-*(Ensure `NODE_ENV=production` is set in your environment).*
 
-## 🌍 Deployment Options
+Or:
 
-### Deploying to Render (Recommended for Full-Stack Node + SQLite)
+```bash
+make docker-build
+make docker-run
+```
 
-1.  Push your code to a GitHub repository.
-2.  Log in to [Render](https://render.com/) and click **New > Web Service**.
-3.  Connect your GitHub repo.
-4.  Configure the service:
-    *   **Runtime:** `Node`
-    *   **Build Command:** `npm install && npm run build`
-    *   **Start Command:** `npm run start`
-5.  Set your Environment Variables on Render:
-    *   `NODE_ENV=production`
-    *   `JWT_SECRET=your_production_secret`
-6.  Click **Create Web Service**.
+## Content source
 
-## 👨‍💻 Author
+The canonical public profile content lives in `src/content/profile.ts`. Update that file when resume details change so the home page and desktop About app stay aligned. The generated `/api/resume` endpoint is the first-party resume view used by the UI.
 
-**Siddhartha Goswami**
-*   [GitHub (@sidg2hp)](https://github.com/sidg2hp)
-*   [LinkedIn](https://www.linkedin.com/in/siddhartha-goswami-1a83681b2/)
+## Links
 
----
-*Built with ❤️ and simulating Linux.*
+- GitHub: <https://github.com/sidg2hp>
+- LinkedIn: <https://www.linkedin.com/in/siddhartha-goswami-1a83681b2/>
+- Email: <mailto:sidgos010304@gmail.com>
