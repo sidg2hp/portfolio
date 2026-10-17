@@ -89,7 +89,6 @@ The Dockerfile pins the Node image, installs the lockfile dependencies, builds t
 docker build -t siddhartha-portfolio .
 docker run --rm -p 3000:3000 siddhartha-portfolio
 ```
-
 Or:
 
 ```bash

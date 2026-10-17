@@ -27,6 +27,15 @@ export const ResumeApp: React.FC = () => {
               <Download size={14} />
               <span>Download</span>
             </a>
+            <a
+              href="https://drive.google.com/file/d/11n9IYV7lZZN-7RM5gwyHwSuryNhmYXdz/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1 border border-white/20 hover:border-[#E95420] px-3 py-1.5 rounded text-xs font-bold transition-colors"
+            >
+              <Download size={14} />
+              <span>Drive copy</span>
+            </a>
           </div>
         </div>
 
