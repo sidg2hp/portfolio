@@ -1,16 +1,14 @@
 import React from 'react';
-import { useStore } from '../store/useStore';
-import { FileText } from 'lucide-react';
 import clsx from 'clsx';
 import { motion } from 'motion/react';
 
 interface DesktopIconProps {
   name: string;
   icon: React.ReactNode;
-  onDoubleClick: () => void;
+  onActivate: () => void;
 }
 
-export const DesktopIcon: React.FC<DesktopIconProps> = ({ name, icon, onDoubleClick }) => {
+export const DesktopIcon: React.FC<DesktopIconProps> = ({ name, icon, onActivate }) => {
   const [selected, setSelected] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -33,11 +31,19 @@ export const DesktopIcon: React.FC<DesktopIconProps> = ({ name, icon, onDoubleCl
       drag
       dragMomentum={false}
       className={clsx(
-        "flex flex-col items-center justify-center p-2 rounded w-24 cursor-pointer transition-colors duration-200",
+        "desktop-icon flex flex-col items-center justify-center p-2 rounded w-24 cursor-pointer transition-colors duration-200",
         selected ? "bg-white/20 border border-white/30" : "hover:bg-white/10 border border-transparent"
       )}
-      onClick={() => setSelected(true)}
-      onDoubleClick={onDoubleClick}
+      role="button"
+      tabIndex={0}
+      aria-label={`Open ${name}`}
+      onClick={() => { setSelected(true); onActivate(); }}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onActivate();
+        }
+      }}
     >
       <div className="mb-1 text-white drop-shadow-md">
         {icon}

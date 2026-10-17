@@ -8,19 +8,22 @@ export const Dock: React.FC = () => {
   const { openWindow, activeWindowId, windows } = useStore();
 
   return (
-    <div className="fixed left-0 top-7 bottom-0 w-16 bg-[#1E1E1E]/90 backdrop-blur-md flex flex-col items-center py-2 space-y-2 z-40 border-r border-white/5 shadow-2xl">
+    <div className="ubuntu-dock">
       {APPS.map((app) => {
         const isOpen = windows.some((w) => w.id === app.id);
         const isActive = activeWindowId === app.id;
         const Icon = app.icon;
 
         return (
+          <React.Fragment key={app.id}>
+          {app.category === 'utility' && app.id === 'terminal' && <div className="dock-divider" aria-hidden="true" />}
           <motion.button
             key={app.id}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => openWindow(app.id)}
-            className="relative group w-12 h-12 flex items-center justify-center rounded-xl transition-all duration-200 hover:bg-white/10"
+            aria-label={`Open ${app.title}`}
+            className={clsx('dock-button relative group', app.category === 'primary' && 'dock-primary-button')}
           >
             {/* Active Indicator */}
             {isOpen && (
@@ -32,7 +35,7 @@ export const Dock: React.FC = () => {
 
             {/* Icon */}
             <div 
-              className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg"
+               className="dock-icon w-10 h-10 rounded-lg flex items-center justify-center shadow-lg"
               style={{ backgroundColor: app.color }}
             >
               <Icon size={24} className="text-white" />
@@ -43,6 +46,7 @@ export const Dock: React.FC = () => {
               {app.title}
             </div>
           </motion.button>
+          </React.Fragment>
         );
       })}
     </div>

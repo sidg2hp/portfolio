@@ -62,10 +62,11 @@ export const projects = [
 ];
 
 export const skills = {
-  'AI systems': ['LLMs', 'RAG', 'GraphRAG', 'LangChain', 'LangGraph', 'Agentic AI', 'LLM Evaluation'],
-  'Retrieval & data': ['FAISS', 'BM25', 'Neo4j', 'PostgreSQL', 'Pandas', 'NumPy'],
-  'ML & research': ['PyTorch', 'Transformers', 'XGBoost', 'CNNs', 'RNNs / LSTMs', 'Transfer Learning'],
-  'Build & ship': ['Python', 'C++', 'TypeScript', 'FastAPI', 'Django', 'Docker', 'AWS', 'Git'],
+  'Languages': ['Python', 'C++', 'SQL', 'JavaScript / TypeScript'],
+  'GenAI / LLM': ['LLMs', 'RAG', 'GraphRAG', 'LangChain', 'LangGraph', 'FAISS', 'BM25', 'Neo4j', 'Ollama', 'Tavily', 'Prompt Engineering', 'Agentic AI', 'LLM Evaluation'],
+  'Data Science / ML': ['Pandas', 'NumPy', 'scikit-learn', 'XGBoost', 'PyTorch', 'CNNs', 'RNNs / LSTMs', 'Transformers', 'Transfer Learning', 'Model Evaluation'],
+  'Backend / Infrastructure': ['FastAPI', 'Django', 'REST APIs', 'PostgreSQL', 'Docker', 'Git', 'AWS (S3, Rekognition)', 'Linux / WSL'],
+  'Math': ['Probability', 'Statistics', 'Linear Algebra', 'Optimization', 'Stochastic Processes'],
 };
 
 export const achievements = [

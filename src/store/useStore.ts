@@ -41,32 +41,37 @@ interface DesktopState {
 }
 
 export const useStore = create<DesktopState>((set) => ({
-  windows: [],
-  activeWindowId: null,
+  windows: [{ id: 'about', minimized: false, maximized: false, zIndex: 2 }],
+  activeWindowId: 'about',
   booted: false,
   locked: false,
   user: null,
   isAuthenticated: false,
 
   openWindow: (id) => set((state) => {
+    const nextZIndex = Math.max(0, ...state.windows.map((window) => window.zIndex)) + 1;
     if (state.windows.find((w) => w.id === id)) {
       return {
         activeWindowId: id,
         windows: state.windows.map((w) => 
-          w.id === id ? { ...w, minimized: false, zIndex: state.windows.length + 1 } : w
+          w.id === id ? { ...w, minimized: false, zIndex: nextZIndex } : w
         ),
       };
     }
     return {
-      windows: [...state.windows, { id, minimized: false, maximized: false, zIndex: state.windows.length + 1 }],
+      windows: [...state.windows, { id, minimized: false, maximized: false, zIndex: nextZIndex }],
       activeWindowId: id,
     };
   }),
 
-  closeWindow: (id) => set((state) => ({
-    windows: state.windows.filter((w) => w.id !== id),
-    activeWindowId: state.activeWindowId === id ? null : state.activeWindowId,
-  })),
+  closeWindow: (id) => set((state) => {
+    const remaining = state.windows.filter((w) => w.id !== id);
+    const nextActive = state.activeWindowId === id
+      ? remaining.filter((window) => !window.minimized).sort((a, b) => b.zIndex - a.zIndex)[0]?.id ?? null
+      : state.activeWindowId;
+
+    return { windows: remaining, activeWindowId: nextActive };
+  }),
 
   minimizeWindow: (id) => set((state) => ({
     windows: state.windows.map((w) => w.id === id ? { ...w, minimized: true } : w),
@@ -80,7 +85,7 @@ export const useStore = create<DesktopState>((set) => ({
   focusWindow: (id) => set((state) => ({
     activeWindowId: id,
     windows: state.windows.map((w) => 
-      w.id === id ? { ...w, zIndex: Math.max(...state.windows.map((ww) => ww.zIndex)) + 1 } : w
+      w.id === id ? { ...w, zIndex: Math.max(0, ...state.windows.map((ww) => ww.zIndex)) + 1 } : w
     ),
   })),
 

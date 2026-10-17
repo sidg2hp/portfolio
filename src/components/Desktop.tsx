@@ -1,83 +1,75 @@
 import React from 'react';
+import { Activity, FileText, Terminal, User } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
 import { useStore } from '../store/useStore';
-import { TopBar } from './TopBar';
-import { Dock } from './Dock';
-import { Window } from './Window';
-import { TerminalApp } from '../apps/Terminal/TerminalApp';
-import { SnakeApp } from '../apps/Snake/SnakeApp';
-import { ResumeApp } from '../apps/Resume/ResumeApp';
 import { AboutApp } from '../apps/About/AboutApp';
+import { ResumeApp } from '../apps/Resume/ResumeApp';
+import { SnakeApp } from '../apps/Snake/SnakeApp';
 import { SystemMonitorApp } from '../apps/SystemMonitor/SystemMonitorApp';
+import { TerminalApp } from '../apps/Terminal/TerminalApp';
+import { Dock } from './Dock';
 import { DesktopIcon } from './DesktopIcon';
-import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, FileText, Terminal, User, Activity } from 'lucide-react';
+import { TopBar } from './TopBar';
+import { Window } from './Window';
+import { profile } from '../content/profile';
 
-export const Desktop: React.FC<{ onExit?: () => void }> = ({ onExit }) => {
+export const Desktop: React.FC = () => {
   const { windows, openWindow } = useStore();
 
   return (
-    <div className="h-screen w-screen bg-cover bg-center overflow-hidden select-none font-sans relative"
-         style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=2070&auto=format&fit=crop")' }}>
-      
-      {/* Overlay for Yaru theme tint */}
-      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+    <main className="ubuntu-desktop-shell min-h-screen w-screen overflow-hidden select-none font-sans">
+      <div className="ubuntu-wallpaper" aria-hidden="true">
+        <div className="wallpaper-glow wallpaper-glow-one" />
+        <div className="wallpaper-glow wallpaper-glow-two" />
+        <div className="wallpaper-grid" />
+        <div className="wallpaper-lines" />
+      </div>
 
       <TopBar />
       <Dock />
 
-      {onExit && (
-        <button
-          onClick={onExit}
-          className="absolute right-4 bottom-4 z-50 flex items-center gap-2 rounded-full border border-white/20 bg-[#1E1E1E]/90 px-4 py-2 text-xs font-medium text-white shadow-xl backdrop-blur-md transition-colors hover:border-[#c7ed72]/60 hover:text-[#c7ed72]"
-        >
-          <ArrowLeft size={14} /> Back to portfolio
-        </button>
-      )}
+      <section className="desktop-welcome" aria-label="Portfolio workspace introduction">
+        <div className="desktop-welcome-kicker"><span /> WORKSPACE / ONLINE</div>
+        <h1>Welcome to<br /><strong>{profile.name}</strong></h1>
+        <p>{profile.role} · {profile.location}</p>
+        <div className="desktop-welcome-hint"><span>01</span> Start with <b>About Siddhartha</b></div>
+      </section>
 
-      {/* Desktop Icons - Left side */}
-      <div className="absolute top-10 left-20 flex flex-col gap-4 p-4 z-0">
-        <DesktopIcon 
-          name="Terminal" 
-          icon={<Terminal size={48} className="text-gray-200" />} 
-          onDoubleClick={() => openWindow('terminal')} 
-        />
-        <DesktopIcon 
-          name="About Me" 
-          icon={<User size={48} className="text-blue-400" />} 
-          onDoubleClick={() => openWindow('about')} 
-        />
-        <DesktopIcon 
-          name="System Monitor" 
-          icon={<Activity size={48} className="text-green-400" />} 
-          onDoubleClick={() => openWindow('monitor')} 
-        />
+      <div className="desktop-icons desktop-icons-primary">
+        <DesktopIcon name="About Siddhartha" icon={<User size={42} />} onActivate={() => openWindow('about')} />
+        <DesktopIcon name="Resume PDF" icon={<FileText size={42} />} onActivate={() => openWindow('resume')} />
       </div>
 
-      {/* Centered Resume Icon */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 scale-125">
-        <DesktopIcon 
-          name="Resume" 
-          icon={<FileText size={48} className="text-red-500 fill-white" />} 
-          onDoubleClick={() => openWindow('resume')} 
-        />
+      <div className="desktop-icons desktop-icons-utilities">
+        <DesktopIcon name="Terminal" icon={<Terminal size={36} />} onActivate={() => openWindow('terminal')} />
+        <DesktopIcon name="System Monitor" icon={<Activity size={36} />} onActivate={() => openWindow('monitor')} />
       </div>
 
-      <div className="absolute inset-0 pt-7 pl-16 pointer-events-none">
+      <div className="desktop-shortcut-note">
+        <span className="shortcut-dot" /> Select an app to explore
+      </div>
+
+      <div className="desktop-window-layer">
         <AnimatePresence>
           {windows.map((window) => (
             <div key={window.id} className="pointer-events-auto">
-              <Window id={window.id} title={window.id === 'monitor' ? 'System Monitor' : window.id.charAt(0).toUpperCase() + window.id.slice(1)}>
+              <Window
+                id={window.id}
+                title={window.id === 'about' ? 'About Siddhartha' : window.id === 'monitor' ? 'System Monitor' : window.id === 'resume' ? 'Siddhartha Goswami — Resume' : window.id.charAt(0).toUpperCase() + window.id.slice(1)}
+                initialWidth={window.id === 'about' ? 920 : window.id === 'resume' ? 900 : 800}
+                initialHeight={window.id === 'about' ? 650 : window.id === 'resume' ? 680 : 600}
+              >
                 {window.id === 'terminal' && <TerminalApp />}
                 {window.id === 'snake' && <SnakeApp />}
                 {window.id === 'resume' && <ResumeApp />}
                 {window.id === 'about' && <AboutApp />}
                 {window.id === 'monitor' && <SystemMonitorApp />}
-                {window.id === 'help' && <div className="p-4 text-white">Help content goes here...</div>}
+                {window.id === 'help' && <div className="p-6 text-white">Use the About app for a quick profile, Resume PDF for the full resume, and Terminal for the portfolio command line.</div>}
               </Window>
             </div>
           ))}
         </AnimatePresence>
       </div>
-    </div>
+    </main>
   );
 };

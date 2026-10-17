@@ -1,15 +1,14 @@
 # Siddhartha Goswami · Portfolio
 
-A fast, responsive portfolio for Siddhartha Goswami, an AI/ML engineer and Mathematics & Computing undergraduate at IIT Roorkee. The primary experience is a recruiter-friendly case-study site; the original Ubuntu desktop, terminal, resume viewer, and Snake game remain available as an optional interactive mode.
+A recruiter-friendly Ubuntu portfolio desktop for Siddhartha Goswami, an AI/ML engineer and Mathematics & Computing undergraduate at IIT Roorkee. The Ubuntu workspace is the first-load experience: About and Resume are immediately available, while Terminal, System Monitor, and Snake add personality without hiding the work.
 
 ## What is included
 
-- Immediate hero section with clear positioning, resume access, and contact links.
+- Ubuntu-inspired desktop opens immediately with the About app already visible.
 - Resume-led project stories for Enterprise Knowledge Assistant, Video Blog App, and FlixPulse.
-- Experience, skills, education, competitive programming, and achievement sections.
-- Responsive layout with keyboard-friendly navigation and a mobile menu.
-- Optional Ubuntu desktop mode with Terminal, Resume, About, System Monitor, and Snake apps.
-- Express API for the terminal data, generated resume PDF, and Snake high scores.
+- Exact attached resume PDF served locally as `public/Siddhartha_Goswami_Resume.pdf`.
+- About, Resume, Terminal, System Monitor, and Snake apps are available from the dock.
+- Express API for terminal data and Snake high scores.
 
 ## Stack
 
@@ -30,7 +29,7 @@ npm ci
 cp .env.example .env
 ```
 
-The public portfolio works without environment variables. Set `JWT_SECRET` in `.env` if you use the optional authentication endpoints.
+The public portfolio works without environment variables. Set `JWT_SECRET` in `.env` only if you use the optional authentication endpoints.
 
 ## Run locally
 
@@ -38,7 +37,7 @@ The public portfolio works without environment variables. Set `JWT_SECRET` in `.
 npm run dev
 ```
 
-Open <http://localhost:3000>. The same command is available as `make dev`.
+Open <http://localhost:3000>. The Ubuntu desktop is the first screen; click About or Resume in the dock to begin. The same command is available as `make dev`.
 
 ## Checks
 
@@ -61,7 +60,7 @@ npm run build
 NODE_ENV=production npm run start
 ```
 
-The production server serves the built frontend and API on port 3000. On Windows PowerShell, use `$env:NODE_ENV="production"; npm run start`.
+The production server serves the built frontend, exact resume PDF, and API on port 3000. On Windows PowerShell, use `$env:NODE_ENV="production"; npm run start`.
 
 ## Docker
 
@@ -81,7 +80,7 @@ make docker-run
 
 ## Content source
 
-The canonical public profile content lives in `src/content/profile.ts`. Update that file when resume details change so the home page and desktop About app stay aligned. The generated `/api/resume` endpoint is the first-party resume view used by the UI.
+The canonical public profile content lives in `src/content/profile.ts`. Update that file when resume details change so the desktop About app stays aligned. The attached resume is kept unchanged as `public/Siddhartha_Goswami_Resume.pdf`; `/api/resume` serves that same file and `/api/resume?download=1` downloads it.
 
 ## Links
 

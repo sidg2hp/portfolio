@@ -6,7 +6,6 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import PDFDocument from 'pdfkit';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -175,90 +174,12 @@ app.post('/api/highscore', (req, res) => {
 });
 
 app.get('/api/resume', (req, res) => {
-  const doc = new PDFDocument({ margin: 50 });
-
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'inline; filename=Siddhartha_Goswami_Resume.pdf');
-
-  doc.pipe(res);
-
-  // Header
-  doc.fontSize(24).font('Helvetica-Bold').text('SIDDHARTHA GOSWAMI', { align: 'center' });
-  doc.fontSize(10).font('Helvetica').text('IIT Roorkee, Uttarakhand, India', { align: 'center' });
-  doc.moveDown(0.5);
-  
-  // Contact Links
-  const contactY = doc.y;
-  doc.text('+91-8004927995 | ', { continued: true, align: 'center' });
-  doc.fillColor('blue').text('sidgos010304@gmail.com', { link: 'mailto:sidgos010304@gmail.com', continued: true, underline: true });
-  doc.fillColor('black').text(' | ', { continued: true, underline: false });
-  doc.fillColor('blue').text('LinkedIn', { link: CONTACT.linkedin, continued: true, underline: true });
-  doc.fillColor('black').text(' | ', { continued: true, underline: false });
-  doc.fillColor('blue').text('GitHub', { link: CONTACT.github, underline: true });
-  doc.fillColor('black');
-  
-  doc.moveDown(1);
-
-  // Education
-  doc.fontSize(14).font('Helvetica-Bold').text('EDUCATION', { underline: true });
-  doc.moveDown(0.5);
-  doc.fontSize(12).text('Indian Institute of Technology Roorkee', { continued: true });
-  doc.font('Helvetica').text('Roorkee, India', { align: 'right' });
-  doc.font('Helvetica-Oblique').text('BS-MS Mathematics and Computing', { continued: true });
-  doc.text('Aug 2023 - May 2028 (Expected)', { align: 'right' });
-  doc.moveDown(1);
-
-  // Technical Skills
-  doc.fontSize(14).font('Helvetica-Bold').text('TECHNICAL SKILLS', { underline: true });
-  doc.moveDown(0.5);
-  doc.fontSize(10).font('Helvetica-Bold').text('Programming Languages: ', { continued: true }).font('Helvetica').text(SKILLS.languages.join(', '));
-  doc.font('Helvetica-Bold').text('Machine Learning & AI: ', { continued: true }).font('Helvetica').text(SKILLS.machine_learning.join(', '));
-  doc.font('Helvetica-Bold').text('Generative AI: ', { continued: true }).font('Helvetica').text(SKILLS.generative_ai.join(', '));
-  doc.font('Helvetica-Bold').text('Development & Tools: ', { continued: true }).font('Helvetica').text(SKILLS.development.join(', '));
-  doc.moveDown(1);
-
-  // Key Projects
-  doc.fontSize(14).font('Helvetica-Bold').text('KEY PROJECTS', { underline: true });
-  doc.moveDown(0.5);
-
-  PROJECTS.forEach(project => {
-    doc.fontSize(11).font('Helvetica-Bold').text(project.title, { continued: true });
-    doc.font('Helvetica-Oblique').text(` | ${project.tech.join(', ')}`, { continued: true });
-    doc.fillColor('blue').text(' GitHub', { link: project.link, align: 'right', underline: true });
-    doc.fillColor('black');
-    doc.fontSize(10).font('Helvetica').text(project.description);
-    doc.moveDown(0.5);
-  });
-  doc.moveDown(0.5);
-
-  // Experience
-  doc.fontSize(14).font('Helvetica-Bold').text('EXPERIENCE & LEADERSHIP', { underline: true });
-  doc.moveDown(0.5);
-  
-  EXPERIENCE.forEach(exp => {
-    doc.fontSize(11).font('Helvetica-Bold').text(exp.role, { continued: true });
-    doc.font('Helvetica').text(' — ' + exp.organization);
-    doc.fontSize(10).font('Helvetica-Oblique').text(exp.period, { align: 'right' });
-    doc.font('Helvetica').text(exp.description);
-    doc.moveDown(0.5);
-  });
-  doc.moveDown(1);
-
-  // Achievements
-  doc.fontSize(14).font('Helvetica-Bold').text('ACHIEVEMENTS & COMPETITIVE PROGRAMMING', { underline: true });
-  doc.moveDown(0.5);
-  const achievements = [
-    "AIR 1489 in JEE Advanced 2023 — top 0.05% among ~180,000 candidates",
-    "AIR 841 in KVPY SA 2020 — National Science Fellowship (DST, Government of India)",
-    "Codeforces: sisyphus_7 — Rated Expert (maximum rating 1607)"
-  ];
-  
-  achievements.forEach(ach => {
-    doc.fontSize(10).font('Helvetica').text(`•  ${ach}`);
-    doc.moveDown(0.2);
-  });
-
-  doc.end();
+  const resumePath = path.join(__dirname, 'public', 'Siddhartha_Goswami_Resume.pdf');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.setHeader('Content-Disposition', req.query.download === '1'
+    ? 'attachment; filename=Siddhartha_Goswami_Resume.pdf'
+    : 'inline; filename=Siddhartha_Goswami_Resume.pdf');
+  res.sendFile(resumePath);
 });
 
 // Vite Middleware

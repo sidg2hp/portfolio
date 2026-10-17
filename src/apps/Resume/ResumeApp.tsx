@@ -10,24 +10,34 @@ export const ResumeApp: React.FC = () => {
             <FileText size={18} />
             <span className="font-medium text-sm">resume.pdf</span>
           </div>
-          <a
-            href="/api/resume"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-1 bg-[#E95420] hover:bg-[#C74215] px-3 py-1.5 rounded text-xs font-bold transition-colors"
-          >
-            <Download size={14} />
-            <span>Open resume</span>
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="/Siddhartha_Goswami_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1 bg-[#E95420] hover:bg-[#C74215] px-3 py-1.5 rounded text-xs font-bold transition-colors"
+            >
+              <FileText size={14} />
+              <span>Open PDF</span>
+            </a>
+            <a
+              href="/api/resume?download=1"
+              className="flex items-center space-x-1 border border-white/20 hover:border-[#E95420] px-3 py-1.5 rounded text-xs font-bold transition-colors"
+            >
+              <Download size={14} />
+              <span>Download</span>
+            </a>
+          </div>
         </div>
 
         <div className="flex-1 bg-gray-100 overflow-auto flex justify-center p-8">
           <iframe
-            src="/api/resume"
+            src="/Siddhartha_Goswami_Resume.pdf"
             className="w-full h-full border border-gray-300 shadow-lg"
             title="Resume PDF"
             allow="autoplay"
           />
+          <p className="mt-3 text-center text-xs text-gray-500">Can’t view the PDF inline? <a className="underline" href="/Siddhartha_Goswami_Resume.pdf">Open it in a new tab</a>.</p>
         </div>
       </div>
     </div>

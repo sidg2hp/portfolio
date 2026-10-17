@@ -1,5 +1,5 @@
 {
   "name": "Ubuntu Portfolio",
-  "description": "A portfolio website simulating the Ubuntu 22.04 GNOME desktop experience with a functional terminal, snake game, and backend API.",
+  "description": "An Ubuntu-inspired recruiter-facing portfolio desktop for Siddhartha Goswami, featuring his AI engineering work, exact resume PDF, terminal, and interactive utilities.",
   "requestFramePermissions": []
 }
