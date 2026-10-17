@@ -2,6 +2,8 @@
 .desktop-welcome-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
 .desktop-welcome-actions button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 6px; color: #d9c9d7; background: rgba(0,0,0,.12); font: 9px 'DM Mono', monospace; transition: border-color .2s ease, color .2s ease, background .2s ease; }
 .desktop-welcome-actions button:hover { border-color: #ff9d72; color: #ffb08d; background: rgba(255,157,114,.08); }
+.desktop-welcome-hint { border: 1px solid rgba(255,255,255,.12); cursor: pointer; font: 11px 'DM Mono', monospace; transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease; }
+.desktop-welcome-hint:hover, .desktop-welcome-hint:focus-visible { border-color: rgba(255,157,114,.6); color: #fff; background: rgba(255,157,114,.1); outline: none; transform: translateY(-2px); }
 
 .recruiter-app-shell { min-height: 100%; overflow-y: auto; color: #f6eef5; background: linear-gradient(145deg, #1b1720, #15151d 75%); }
 .recruiter-app-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; padding: 28px 32px 23px; background: radial-gradient(circle at 90% 0%, rgba(182,95,58,.2), transparent 35%), linear-gradient(135deg, #2b1d2d, #17131b); border-bottom: 1px solid rgba(255,255,255,.1); }

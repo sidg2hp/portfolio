@@ -34,7 +34,9 @@ export const Desktop: React.FC = () => {
         <div className="desktop-welcome-kicker"><span /> WORKSPACE / ONLINE</div>
         <h1>Welcome to<br /><strong>{profile.name}</strong></h1>
         <p>{profile.role} · {profile.location}</p>
-        <div className="desktop-welcome-hint"><span>01</span> Start with <b>About Siddhartha</b></div>
+        <button className="desktop-welcome-hint" type="button" onClick={() => openWindow('about')} aria-label="Open About Siddhartha">
+          <span>01</span> Start with <b>About Siddhartha</b>
+        </button>
         <div className="desktop-welcome-actions">
           <button onClick={() => openWindow('recruiter')}><BriefcaseBusiness size={14} /> Recruiter brief</button>
           <button onClick={() => openWindow('projects')}><FolderKanban size={14} /> Explore projects</button>
