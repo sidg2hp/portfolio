@@ -77,7 +77,7 @@ const projectMetrics: Record<string, ProjectMetric[]> = {
 
 const recruiterSummaries: Record<string, string> = {
   'Enterprise Knowledge Assistant':
-    'A grounded enterprise assistant that turns messy internal knowledge into cited, domain-aware decisions.',
+    'An offline-friendly, evidence-first enterprise RAG stack with six-domain LangGraph routing, hybrid retrieval adapters, inspectable citations, deterministic evaluation, and safe abstention.',
   'Video Blog App':
     'A complete media-to-knowledge product that makes long-form video searchable, teachable, and interactive.',
   FlixPulse:

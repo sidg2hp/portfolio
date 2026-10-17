@@ -62,8 +62,8 @@ const PROJECTS = [
     id: 1,
     name: "enterprise-knowledge-assistant",
     title: "Enterprise Knowledge Assistant",
-    description: "Built a modular enterprise decision-intelligence assistant for TXT and Markdown documents with six-domain LangGraph routing, BM25 retrieval, optional FAISS/vector, Ollama, and Neo4j adapters, stable citations, evaluation metrics, and explicit abstention.",
-    tech: ["Python", "FastAPI", "LangGraph", "BM25", "FAISS", "Neo4j", "Ollama", "Next.js", "Docker"],
+    description: "Built an offline-friendly, evidence-first enterprise RAG platform for TXT and Markdown documents with six-domain LangGraph routing, BM25-first retrieval, optional FAISS/vector, Ollama, and read-only Neo4j adapters, stable citations, deterministic evaluation metrics, request-safe observability, and explicit abstention.",
+    tech: ["Python", "FastAPI", "LangGraph", "BM25", "FAISS", "Neo4j", "Ollama", "Next.js", "Docker", "pytest"],
     link: "https://github.com/sidg2hp/enterprise-knowledge"
   },
   {

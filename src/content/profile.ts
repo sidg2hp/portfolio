@@ -17,15 +17,15 @@ export const projects = [
   {
     number: '01',
     title: 'Enterprise Knowledge Assistant',
-    type: 'Evidence-first document retrieval',
+    type: 'Evidence-first enterprise RAG · decision intelligence',
     description:
-      'A modular enterprise decision-intelligence assistant that turns indexed TXT and Markdown documents into searchable, cited evidence with explicit abstention.',
+      'An offline-friendly, evidence-first enterprise RAG platform that turns indexed TXT and Markdown into cited, inspectable answers with domain routing and explicit abstention.',
     highlights: [
       'Built deterministic UTF-8 ingestion, paragraph-aware chunking, SHA-256 document metadata, and stable document/chunk citation IDs.',
-      'Implemented six-domain LangGraph routing, BM25 retrieval, optional FAISS/vector and Ollama adapters, safe read-only Neo4j context, structured evidence, and abstention.',
-      'Shipped an optional Ollama grounded-generation path, deterministic Recall@5/MRR@5 and citation evaluation, request-correlated JSON events, Docker health checks, and CI.',
+      'Implemented a six-domain LangGraph state workflow with BM25-first retrieval, optional FAISS/vector and Ollama embedding adapters, safe read-only Neo4j graph context, structured evidence, and abstention.',
+      'Shipped deterministic Recall@5/MRR@5, citation-validity, groundedness-proxy, and abstention-accuracy evaluation, plus request-correlated JSON observability, Docker health checks, and CI.',
     ],
-    stack: ['Python', 'FastAPI', 'LangGraph', 'BM25', 'FAISS', 'Neo4j', 'Ollama', 'Next.js', 'Docker'],
+    stack: ['Python', 'FastAPI', 'LangGraph', 'BM25', 'FAISS', 'Neo4j', 'Ollama', 'Next.js', 'Docker', 'pytest'],
     link: 'https://github.com/sidg2hp/enterprise-knowledge',
     category: 'genai',
     accent: 'lime',
