@@ -5,6 +5,7 @@ import {
   ChevronDown,
   ChevronUp,
   Database,
+  Gauge,
   Github,
   GitBranch,
   Layers3,
@@ -13,12 +14,14 @@ import {
   Sparkles,
   Target,
   Workflow,
+  Server,
+  FlaskConical,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { projects } from '../../content/profile';
 
 type Project = (typeof projects)[number];
-export type ProjectFilter = 'all' | 'genai' | 'ml';
+export type ProjectFilter = 'all' | 'genai' | 'ml' | 'systems';
 export type ProjectsView = 'recruiter' | 'technical';
 
 export interface ProjectsAppProps {
@@ -43,12 +46,17 @@ const filterOptions: Array<{ id: ProjectFilter; label: string }> = [
   { id: 'all', label: 'All' },
   { id: 'genai', label: 'GenAI / RAG' },
   { id: 'ml', label: 'ML / Product' },
+  { id: 'systems', label: 'Systems / Research' },
 ];
 
 const projectCategories: Record<string, Exclude<ProjectFilter, 'all'>> = {
   'Enterprise Knowledge Assistant': 'genai',
   'Video Blog App': 'genai',
   FlixPulse: 'ml',
+  'Hybrid DGM–Monte Carlo Option Pricing': 'ml',
+  'Kairon: Deep Research Dual-Agent System': 'genai',
+  NetSentinel: 'systems',
+  'Multimodal Property Valuation': 'ml',
 };
 
 const projectMetrics: Record<string, ProjectMetric[]> = {
@@ -60,6 +68,11 @@ const projectMetrics: Record<string, ProjectMetric[]> = {
     { value: '0.834', label: 'NDCG@10' },
     { value: '99.96%', label: 'user coverage' },
   ],
+  'Hybrid DGM–Monte Carlo Option Pricing': [
+    { value: '0.11%', label: '1D rel. L² error' },
+    { value: '0.61%', label: '2D rel. L² error' },
+    { value: '>99.999%', label: 'variance reduction' },
+  ],
 };
 
 const recruiterSummaries: Record<string, string> = {
@@ -69,6 +82,14 @@ const recruiterSummaries: Record<string, string> = {
     'A complete media-to-knowledge product that makes long-form video searchable, teachable, and interactive.',
   FlixPulse:
     'A measurable recommendation product that combines strong offline quality with a usable, explainable frontend.',
+  'Hybrid DGM–Monte Carlo Option Pricing':
+    'A mathematically serious scientific-ML system with clear validation, baselines, ablations, and an honest account of where high-dimensional pure DGM becomes unstable.',
+  'Kairon: Deep Research Dual-Agent System':
+    'A focused agentic prototype that cleanly separates web research from drafting without overstating itself as a production research platform.',
+  NetSentinel:
+    'A systems project that demonstrates networking fundamentals beyond the AI stack: sockets, concurrency, protocol parsing, filtering, logging, and tests.',
+  'Multimodal Property Valuation':
+    'A useful multimodal research study because it reports both the promise and the limitation: visual features help image-only prediction, but tabular data remains stronger.',
 };
 
 const architectures: Record<string, ArchitectureStep[]> = {
@@ -91,6 +112,30 @@ const architectures: Record<string, ArchitectureStep[]> = {
     { label: 'Recommendation models', detail: 'SVD + item KNN', icon: GitBranch },
     { label: 'FastAPI layer', detail: 'cached + explainable results', icon: Workflow },
     { label: 'React product', detail: 'personalized discovery', icon: Target },
+  ],
+  'Hybrid DGM–Monte Carlo Option Pricing': [
+    { label: 'Market model', detail: 'multi-asset Black–Scholes', icon: Database },
+    { label: 'DGM solver', detail: 'PDE + autodiff Hessians', icon: FlaskConical },
+    { label: 'Validation', detail: 'analytical + MC baselines', icon: Check },
+    { label: 'Hybrid estimator', detail: 'DGM control variate', icon: Gauge },
+  ],
+  'Kairon: Deep Research Dual-Agent System': [
+    { label: 'Question', detail: 'research prompt', icon: Search },
+    { label: 'Research agent', detail: 'Tavily web search', icon: Network },
+    { label: 'Retriever', detail: 'context assembly', icon: Database },
+    { label: 'Drafting agent', detail: 'Ollama answer', icon: Sparkles },
+  ],
+  NetSentinel: [
+    { label: 'TCP listener', detail: 'POSIX sockets', icon: Server },
+    { label: 'Connection thread', detail: 'pthreads', icon: Workflow },
+    { label: 'HTTP parser', detail: 'GET + CONNECT', icon: Search },
+    { label: 'Filter + relay', detail: '403s · logs · tunnel', icon: Network },
+  ],
+  'Multimodal Property Valuation': [
+    { label: 'Property record', detail: 'tabular features', icon: Database },
+    { label: 'Satellite image', detail: 'ResNet18 embedding', icon: FlaskConical },
+    { label: 'Fusion head', detail: 'feature concatenation', icon: Workflow },
+    { label: 'Price estimate', detail: 'log-price regression', icon: Target },
   ],
 };
 

@@ -82,6 +82,38 @@ const PROJECTS = [
     tech: ["Python", "FastAPI", "React", "SVD", "KNN", "scikit-learn"],
     link: "https://github.com/sidg2hp"
   },
+  {
+    id: 4,
+    name: "option-pricing-DGM",
+    title: "Hybrid DGM–Monte Carlo Option Pricing",
+    description: "Deep Galerkin Method solver for multi-asset European option pricing under Black–Scholes, paired with a Monte Carlo control-variate method. The repository reports 0.11% 1D error, 0.61% 2D error, and >99.999% variance reduction in tested settings, while documenting high-dimensional pure-DGM limitations.",
+    tech: ["Python", "PyTorch", "DGM", "PDEs", "Monte Carlo", "Automatic Differentiation"],
+    link: "https://github.com/sidg2hp/option-pricing-DGM"
+  },
+  {
+    id: 5,
+    name: "Deep-Research-Dual-Agent-System",
+    title: "Kairon: Deep Research Dual-Agent System",
+    description: "Focused agentic prototype separating web research through Tavily from answer drafting with a retriever-backed LangChain workflow and local Ollama generation.",
+    tech: ["Python", "LangChain", "Tavily", "Ollama", "FAISS", "Streamlit"],
+    link: "https://github.com/sidg2hp/Deep-Research-Dual-Agent-System"
+  },
+  {
+    id: 6,
+    name: "NetSentineL",
+    title: "NetSentinel: Concurrent HTTP/HTTPS Proxy",
+    description: "C-based TCP forward proxy using POSIX sockets and pthreads, with HTTP parsing, HTTPS CONNECT tunneling, configurable domain blocking, activity logging, Makefile, and shell tests.",
+    tech: ["C", "POSIX Sockets", "pthreads", "HTTP", "HTTPS CONNECT", "Make"],
+    link: "https://github.com/sidg2hp/NetSentineL"
+  },
+  {
+    id: 7,
+    name: "MULTIMODAL-SAT-IMG",
+    title: "Multimodal Property Valuation",
+    description: "Research comparison fusing structured housing attributes with ResNet18 satellite-image embeddings. The README reports fusion R² ≈ 0.822 versus 0.8964 for a tabular baseline, making the limitation part of the result.",
+    tech: ["Python", "PyTorch", "ResNet18", "scikit-learn", "Pandas", "Satellite Imagery"],
+    link: "https://github.com/sidg2hp/MULTIMODAL-SAT-IMG"
+  },
 ];
 
 const SKILLS = {

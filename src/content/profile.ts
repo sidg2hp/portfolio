@@ -27,6 +27,7 @@ export const projects = [
     ],
     stack: ['Python', 'LangGraph', 'LangChain', 'Neo4j', 'FAISS', 'BM25', 'FastAPI', 'Docker'],
     link: 'https://github.com/sidg2hp',
+    category: 'genai',
     accent: 'lime',
   },
   {
@@ -41,7 +42,8 @@ export const projects = [
       'Engineered backend services for media processing, transcript indexing, AI inference, and CRUD workflows with authentication and persistent content management.',
     ],
     stack: ['Django', 'AssemblyAI', 'Ollama', 'FFmpeg', 'yt-dlp', 'RAG'],
-    link: 'https://github.com/sidg2hp',
+    link: 'https://github.com/sidg2hp/Vid2Article',
+    category: 'genai',
     accent: 'orange',
   },
   {
@@ -56,8 +58,73 @@ export const projects = [
       'Evaluated RMSE, MAE, MAP@10, NDCG@10, Hit Rate, Coverage, and Diversity, achieving 99.96% user coverage.',
     ],
     stack: ['Python', 'FastAPI', 'React', 'SVD', 'KNN', 'scikit-learn'],
-    link: 'https://github.com/sidg2hp',
+    link: 'https://github.com/sidg2hp/flixpulse',
+    category: 'ml',
     accent: 'blue',
+  },
+  {
+    number: '04',
+    title: 'Hybrid DGM–Monte Carlo Option Pricing',
+    type: 'Scientific ML · quantitative finance',
+    description:
+      'A research-grade Deep Galerkin Method solver for multi-asset European option pricing under Black–Scholes, paired with a Monte Carlo control-variate method.',
+    highlights: [
+      'Solves the multi-dimensional Black–Scholes PDE with a DGM network, hard terminal constraints, automatic differentiation, and exact/Hutchinson Hessian traces.',
+      'Validated at 0.11% relative L² error for 1D Black–Scholes and 0.61% for a 2D geometric basket in the repository experiments.',
+      'Hybrid DGM–MC reports >99.999% variance reduction for dimensions up to 10; pure DGM becomes unstable in some deep-OTM, high-dimensional cases, which the repo documents honestly.',
+    ],
+    stack: ['Python', 'PyTorch', 'DGM', 'PDEs', 'Monte Carlo', 'Automatic Differentiation'],
+    link: 'https://github.com/sidg2hp/option-pricing-DGM',
+    category: 'ml',
+    accent: 'violet',
+  },
+  {
+    number: '05',
+    title: 'Kairon: Deep Research Dual-Agent System',
+    type: 'Agentic research prototype',
+    description:
+      'A focused dual-agent prototype that separates web research from answer drafting, using Tavily for retrieval and a local Ollama model for generation.',
+    highlights: [
+      'Research agent gathers current web information through TavilySearchResults.',
+      'Drafting agent uses a retriever-backed workflow to turn gathered context into an answer.',
+      'Small, clear codebase with separate agents, pipeline, utilities, and a runnable app; best presented as an agentic prototype rather than a production platform.',
+    ],
+    stack: ['Python', 'LangChain', 'Tavily', 'Ollama', 'FAISS', 'Streamlit'],
+    link: 'https://github.com/sidg2hp/Deep-Research-Dual-Agent-System',
+    category: 'genai',
+    accent: 'purple',
+  },
+  {
+    number: '06',
+    title: 'NetSentinel',
+    type: 'Systems programming · networking',
+    description:
+      'A concurrent TCP-based HTTP/HTTPS forward proxy in C with request parsing, domain filtering, logging, and CONNECT tunneling.',
+    highlights: [
+      'Uses POSIX sockets and a thread-per-connection concurrency model for simultaneous clients.',
+      'Parses HTTP requests, supports HTTPS CONNECT tunneling, blocks configured domains with 403 responses, and logs client/request/status data.',
+      'Includes a Makefile, modular headers/sources, and shell tests; the README notes no persistent keep-alive support and no TLS payload inspection.',
+    ],
+    stack: ['C', 'POSIX Sockets', 'pthreads', 'HTTP', 'HTTPS CONNECT', 'Make'],
+    link: 'https://github.com/sidg2hp/NetSentineL',
+    category: 'systems',
+    accent: 'blue',
+  },
+  {
+    number: '07',
+    title: 'Multimodal Property Valuation',
+    type: 'Multimodal ML research',
+    description:
+      'A research comparison that fuses tabular housing attributes with ResNet18 satellite-image embeddings to estimate property prices.',
+    highlights: [
+      'Uses leakage-safe preprocessing, train-only fitting, lazy image loading, and a PyTorch fusion model combining structured and visual features.',
+      'The repo reports R² ≈ 0.822 for fusion versus 0.8964 for a tabular gradient-boosting baseline and ≈ 0.567 for image-only; the visual signal is useful but not yet better than tabular data.',
+      'Strong discussion of limitations including spatial bias, static imagery, capture-date mismatch, and the need for attention or temporal modeling.',
+    ],
+    stack: ['Python', 'PyTorch', 'ResNet18', 'scikit-learn', 'Pandas', 'Satellite Imagery'],
+    link: 'https://github.com/sidg2hp/MULTIMODAL-SAT-IMG',
+    category: 'ml',
+    accent: 'teal',
   },
 ];
 

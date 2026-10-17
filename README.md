@@ -10,6 +10,7 @@ A recruiter-friendly Ubuntu portfolio desktop for Siddhartha Goswami, an AI/ML e
 - About, Resume, Terminal, System Monitor, and Snake apps are available from the dock.
 - Recruiter Brief and Projects are first-class apps with a searchable Activities launcher (`Ctrl/Cmd + K`).
 - Projects can be filtered by GenAI/RAG or ML/Product, switched between Recruiter and Technical views, expanded, and explored through architecture flows.
+- The project catalog includes GitHub-reviewed work beyond the resume shortlist: DGM–Monte Carlo option pricing, Kairon dual-agent research, NetSentinel proxy systems, and multimodal satellite valuation, with limitations stated instead of inflated claims.
 - Recruiter Brief provides a concise hiring view with availability, direct actions, project proof, experience, achievements, and a build timeline.
 - The About app is a scrollable mini-portfolio with sticky section navigation and expandable project case studies.
 - The System Monitor is a truthful portfolio evidence dashboard rather than fictional CPU/network telemetry.
