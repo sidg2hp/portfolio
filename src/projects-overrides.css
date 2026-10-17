@@ -1,0 +1,18 @@
+/* Dense project details are presented as scannable evidence cards. */
+.projects-app-card-description { max-width: 760px; }
+.projects-app-card-details { padding-top: 20px; padding-right: 24px; padding-bottom: 22px; background: rgba(8, 6, 12, .14); }
+.projects-app-recruiter-detail, .projects-app-technical-detail { max-width: 900px; }
+.projects-app-recruiter-summary { max-width: 760px; font-size: 16px; line-height: 1.5; }
+.projects-app-detail-note { max-width: 680px; padding-left: 11px; border-left: 2px solid rgba(255,157,114,.5); }
+.projects-app-highlights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.projects-app-highlights li { min-height: 84px; padding: 11px 12px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.035); line-height: 1.55; }
+.projects-app-highlights li svg { width: 15px; height: 15px; flex: 0 0 auto; margin-top: 1px; color: #ffb08d; }
+.projects-app-highlights li span { color: #c8bbc9; }
+.projects-app-stack { margin-top: 14px; }
+.projects-app-architecture { margin-top: 24px; }
+
+@media (max-width: 760px) {
+  .projects-app-highlights { grid-template-columns: 1fr; }
+  .projects-app-card-details { padding-left: 18px; }
+  .projects-app-card-description { max-width: none; }
+}
