@@ -96,9 +96,9 @@ const architectures: Record<string, ArchitectureStep[]> = {
   'Enterprise Knowledge Assistant': [
     { label: 'User query', detail: 'question', icon: Search },
     { label: 'LangGraph workflow', detail: 'domain + retrieval steps', icon: Workflow },
-    { label: 'Lexical retriever', detail: 'indexed document chunks', icon: Database },
-    { label: 'Evidence passages', detail: 'ranked source matches', icon: Network },
-    { label: 'Citation gate', detail: 'stable IDs + abstention', icon: Check },
+    { label: 'Hybrid retrieval', detail: 'BM25 · vector · FAISS', icon: Database },
+    { label: 'Graph context', detail: 'optional Neo4j read path', icon: Network },
+    { label: 'Grounding gate', detail: 'Ollama · citations · abstention', icon: Check },
   ],
   'Video Blog App': [
     { label: 'YouTube video', detail: 'source media', icon: Search },
