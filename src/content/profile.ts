@@ -19,13 +19,13 @@ export const projects = [
     title: 'Enterprise Knowledge Assistant',
     type: 'Evidence-first document retrieval',
     description:
-      'An offline-friendly assistant that turns indexed TXT and Markdown documents into searchable, cited evidence with explicit abstention.',
+      'A modular enterprise decision-intelligence assistant that turns indexed TXT and Markdown documents into searchable, cited evidence with explicit abstention.',
     highlights: [
       'Built deterministic UTF-8 ingestion, paragraph-aware chunking, SHA-256 document metadata, and stable document/chunk citation IDs.',
-      'Implemented FastAPI document APIs, an atomic JSON store, LangGraph orchestration, lexical retrieval, structured evidence, and abstention when no passage matches.',
-      'Shipped a responsive Next.js workspace with expandable source passages, Docker Compose health checks, persistent local data, and GitHub Actions CI.',
+      'Implemented six-domain LangGraph routing, BM25 retrieval, optional FAISS/vector and Ollama adapters, safe read-only Neo4j context, structured evidence, and abstention.',
+      'Shipped an optional Ollama grounded-generation path, deterministic Recall@5/MRR@5 and citation evaluation, request-correlated JSON events, Docker health checks, and CI.',
     ],
-    stack: ['Python', 'FastAPI', 'LangGraph', 'Next.js', 'Docker', 'pytest'],
+    stack: ['Python', 'FastAPI', 'LangGraph', 'BM25', 'FAISS', 'Neo4j', 'Ollama', 'Next.js', 'Docker'],
     link: 'https://github.com/sidg2hp/enterprise-knowledge',
     category: 'genai',
     accent: 'lime',

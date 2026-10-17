@@ -62,8 +62,8 @@ const PROJECTS = [
     id: 1,
     name: "enterprise-knowledge-assistant",
     title: "Enterprise Knowledge Assistant",
-    description: "Built an offline-friendly evidence-first assistant for TXT and Markdown documents with deterministic chunking, stable citations, lexical retrieval, explicit abstention, and a responsive full-stack interface.",
-    tech: ["Python", "FastAPI", "LangGraph", "Next.js", "Docker", "pytest"],
+    description: "Built a modular enterprise decision-intelligence assistant for TXT and Markdown documents with six-domain LangGraph routing, BM25 retrieval, optional FAISS/vector, Ollama, and Neo4j adapters, stable citations, evaluation metrics, and explicit abstention.",
+    tech: ["Python", "FastAPI", "LangGraph", "BM25", "FAISS", "Neo4j", "Ollama", "Next.js", "Docker"],
     link: "https://github.com/sidg2hp/enterprise-knowledge"
   },
   {
