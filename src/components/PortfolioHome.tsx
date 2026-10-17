@@ -164,7 +164,7 @@ export const PortfolioHome: React.FC<PortfolioHomeProps> = ({ onOpenDesktop }) =
       <section id="work" className="page-frame content-section">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">Selected work / 03</p>
+            <p className="section-kicker">Selected work / 01</p>
             <h2>Systems with a point of view.</h2>
           </div>
           <p className="section-summary">A few projects where I cared equally about the model, the evidence, and the experience around it.</p>
@@ -210,9 +210,9 @@ export const PortfolioHome: React.FC<PortfolioHomeProps> = ({ onOpenDesktop }) =
           <p>I’m a Mathematics & Computing undergraduate at IIT Roorkee focused on generative AI, agentic systems, RAG, and machine learning.</p>
           <p>My favorite work sits at the intersection of research and product: taking a difficult problem, making the system legible, and shipping something people can trust.</p>
           <div className="about-metrics">
-            <div><strong>5.7M+</strong><span>ratings modeled</span></div>
-            <div><strong>3</strong><span>featured AI products</span></div>
-            <div><strong>2028</strong><span>expected graduation</span></div>
+            <div><strong>5.7M+</strong><span>ratings in FlixPulse</span></div>
+            <div><strong>21K+</strong><span>users modeled</span></div>
+            <div><strong>1.2K+</strong><span>movies modeled</span></div>
           </div>
         </div>
       </section>
@@ -238,7 +238,7 @@ export const PortfolioHome: React.FC<PortfolioHomeProps> = ({ onOpenDesktop }) =
       <section className="page-frame experience-section">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">Experience / 03</p>
+          <p className="section-kicker">Experience / 04</p>
             <h2>Close to the problem.</h2>
           </div>
           <BriefcaseBusiness className="section-mark" size={30} />

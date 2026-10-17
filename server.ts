@@ -62,15 +62,15 @@ const PROJECTS = [
     id: 1,
     name: "enterprise-knowledge-assistant",
     title: "Enterprise Knowledge Assistant",
-    description: "Multi-agent enterprise search and decision-support system with domain routing, hybrid GraphRAG retrieval, and traceable evaluation.",
-    tech: ["Python", "LangGraph", "Neo4j", "FAISS", "BM25", "FastAPI"],
+    description: "Built a multi-agent enterprise search and decision-support system with LangGraph, routing domain-specific queries across specialized HR, policy, precedent, and general-purpose agents. Implemented hybrid GraphRAG with Neo4j, FAISS, and BM25; added groundedness/citation evaluation and Docker Compose deployment for the FastAPI backend, Next.js frontend, and Neo4j database.",
+    tech: ["Python", "LangGraph", "LangChain", "Neo4j", "FAISS", "BM25", "FastAPI", "Docker"],
     link: "https://github.com/sidg2hp"
   },
   {
     id: 2,
     name: "video-blog-app",
     title: "Video Blog App",
-    description: "Full-stack AI platform automating YouTube ingestion, audio extraction, transcription, transcript RAG, and long-form article generation.",
+    description: "Built a full-stack AI platform automating YouTube ingestion and audio extraction to transcription and long-form article generation. Added transcript RAG for Q&A, semantic search, summarization, quizzes, and interactive mind maps grounded in source video content.",
     tech: ["Django", "AssemblyAI", "Ollama", "FFmpeg", "yt-dlp", "RAG"],
     link: "https://github.com/sidg2hp"
   },
@@ -78,7 +78,7 @@ const PROJECTS = [
     id: 3,
     name: "flixpulse",
     title: "FlixPulse: Personalized Recommendation Engine",
-    description: "Recommendation system over 5.7M+ ratings using SVD matrix factorization, item-based collaborative filtering, and cold-start fallbacks.",
+    description: "Developed a recommendation system over 5.7M+ ratings from 21K+ users and 1.2K+ movies using SVD matrix factorization and item-based collaborative filtering. Built cached, explainable recommendations with cold-start fallbacks; achieved MAP@10 = 0.743, NDCG@10 = 0.834, and 99.96% user coverage.",
     tech: ["Python", "FastAPI", "React", "SVD", "KNN", "scikit-learn"],
     link: "https://github.com/sidg2hp"
   },
@@ -86,9 +86,10 @@ const PROJECTS = [
 
 const SKILLS = {
   languages: ["Python", "C++", "SQL", "JavaScript/TypeScript"],
-  machine_learning: ["PyTorch", "Pandas", "NumPy", "Scikit-learn", "XGBoost", "Transformers", "CNNs", "RNNs/LSTMs"],
-  generative_ai: ["LLMs", "RAG", "GraphRAG", "LangChain", "LangGraph", "FAISS", "BM25", "Neo4j", "Ollama", "Agentic AI"],
-  development: ["FastAPI", "Django", "REST APIs", "PostgreSQL", "Docker", "Git", "AWS (S3, Rekognition)", "Linux/WSL"]
+  generative_ai: ["LLMs", "RAG", "GraphRAG", "LangChain", "LangGraph", "FAISS", "BM25", "Neo4j", "Ollama", "Tavily", "Prompt Engineering", "Agentic AI", "LLM Evaluation"],
+  machine_learning: ["Pandas", "NumPy", "Scikit-learn", "XGBoost", "PyTorch", "CNNs", "RNNs/LSTMs", "Transformers", "Transfer Learning", "Model Evaluation"],
+  development: ["FastAPI", "Django", "REST APIs", "PostgreSQL", "Docker", "Git", "AWS (S3, Rekognition)", "Linux/WSL"],
+  math: ["Probability", "Statistics", "Linear Algebra", "Optimization", "Stochastic Processes"]
 };
 
 const EXPERIENCE = [
@@ -97,8 +98,15 @@ const EXPERIENCE = [
     role: "AI Engineering Intern",
     organization: "Hiring Bazaar AI",
     period: "Apr 2026 – Jun 2026",
-    description: "Built and deployed a resume parsing and hybrid retrieval pipeline using BM25 and dense vectors for automated candidate screening."
+    description: "Built an end-to-end resume parsing and hybrid retrieval pipeline, combining BM25 lexical search with dense vector retrieval for automated candidate screening over unstructured resumes. Owned architecture, implementation, and deployment as the sole engineer, collaborating directly with the founding team to integrate it into the production hiring workflow."
   }
+];
+
+const ACHIEVEMENTS = [
+  { title: "3x Hackathon Winner", description: "Won three hackathons for developing innovative technology solutions." },
+  { title: "AIR 1489", description: "JEE Advanced 2023, top 0.05% among ~180k candidates nationwide." },
+  { title: "AIR 841", description: "KVPY SA 2020, National Science Fellowship (DST, Government of India)." },
+  { title: "Codeforces Expert", description: "sisyphus_7, maximum rating 1607; solved problems across data structures, graph algorithms, and number theory." },
 ];
 
 const CONTACT = {
@@ -177,6 +185,10 @@ app.get('/api/experience', (req, res) => {
   setTimeout(() => {
     res.json(EXPERIENCE);
   }, 700);
+});
+
+app.get('/api/achievements', (req, res) => {
+  res.json(ACHIEVEMENTS);
 });
 
 app.get('/api/contact', (req, res) => {
