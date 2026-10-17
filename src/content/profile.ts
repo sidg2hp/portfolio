@@ -17,16 +17,16 @@ export const projects = [
   {
     number: '01',
     title: 'Enterprise Knowledge Assistant',
-    type: 'Multi-agent search & decision support',
+    type: 'Evidence-first document retrieval',
     description:
-      'A production-minded assistant that routes enterprise questions across specialized HR, policy, precedent, and general-purpose agents.',
+      'An offline-friendly assistant that turns indexed TXT and Markdown documents into searchable, cited evidence with explicit abstention.',
     highlights: [
-      'Built a multi-agent enterprise search and decision-support system with LangGraph, routing domain-specific queries across specialized HR, policy, precedent, and general-purpose agents.',
-      'Implemented hybrid GraphRAG retrieval combining Neo4j knowledge graphs, FAISS dense retrieval, and BM25 lexical search to capture both entity relationships and semantic relevance.',
-      'Added a GenAI evaluation layer for groundedness and citation accuracy, then containerized the FastAPI backend, Next.js frontend, and Neo4j database with Docker Compose.',
+      'Built deterministic UTF-8 ingestion, paragraph-aware chunking, SHA-256 document metadata, and stable document/chunk citation IDs.',
+      'Implemented FastAPI document APIs, an atomic JSON store, LangGraph orchestration, lexical retrieval, structured evidence, and abstention when no passage matches.',
+      'Shipped a responsive Next.js workspace with expandable source passages, Docker Compose health checks, persistent local data, and GitHub Actions CI.',
     ],
-    stack: ['Python', 'LangGraph', 'LangChain', 'Neo4j', 'FAISS', 'BM25', 'FastAPI', 'Docker'],
-    link: 'https://github.com/sidg2hp',
+    stack: ['Python', 'FastAPI', 'LangGraph', 'Next.js', 'Docker', 'pytest'],
+    link: 'https://github.com/sidg2hp/enterprise-knowledge',
     category: 'genai',
     accent: 'lime',
   },

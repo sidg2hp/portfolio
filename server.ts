@@ -62,9 +62,9 @@ const PROJECTS = [
     id: 1,
     name: "enterprise-knowledge-assistant",
     title: "Enterprise Knowledge Assistant",
-    description: "Built a multi-agent enterprise search and decision-support system with LangGraph, routing domain-specific queries across specialized HR, policy, precedent, and general-purpose agents. Implemented hybrid GraphRAG with Neo4j, FAISS, and BM25; added groundedness/citation evaluation and Docker Compose deployment for the FastAPI backend, Next.js frontend, and Neo4j database.",
-    tech: ["Python", "LangGraph", "LangChain", "Neo4j", "FAISS", "BM25", "FastAPI", "Docker"],
-    link: "https://github.com/sidg2hp"
+    description: "Built an offline-friendly evidence-first assistant for TXT and Markdown documents with deterministic chunking, stable citations, lexical retrieval, explicit abstention, and a responsive full-stack interface.",
+    tech: ["Python", "FastAPI", "LangGraph", "Next.js", "Docker", "pytest"],
+    link: "https://github.com/sidg2hp/enterprise-knowledge"
   },
   {
     id: 2,
