@@ -22,7 +22,7 @@ export const projects = [
       'An offline-friendly, evidence-first enterprise RAG platform that turns indexed TXT and Markdown into cited, inspectable answers with domain routing and explicit abstention.',
     highlights: [
       'Built deterministic UTF-8 ingestion, paragraph-aware chunking, SHA-256 document metadata, and stable document/chunk citation IDs.',
-      'Implemented a six-domain LangGraph state workflow with BM25-first retrieval, optional FAISS/vector and Ollama embedding adapters, safe read-only Neo4j graph context, structured evidence, and abstention.',
+      'Implemented a six-domain LangGraph state workflow with BM25-first retrieval, citation-linked local GraphRAG entity/relation traversal, optional FAISS/vector and Ollama adapters, and a Neo4j projection path.',
       'Shipped deterministic Recall@5/MRR@5, citation-validity, groundedness-proxy, and abstention-accuracy evaluation, plus request-correlated JSON observability, Docker health checks, and CI.',
     ],
     stack: ['Python', 'FastAPI', 'LangGraph', 'BM25', 'FAISS', 'Neo4j', 'Ollama', 'Next.js', 'Docker', 'pytest'],

@@ -97,7 +97,7 @@ const architectures: Record<string, ArchitectureStep[]> = {
     { label: 'User query', detail: 'question', icon: Search },
     { label: 'LangGraph workflow', detail: 'domain + retrieval steps', icon: Workflow },
     { label: 'Hybrid retrieval', detail: 'BM25 · vector · FAISS', icon: Database },
-    { label: 'Graph context', detail: 'optional Neo4j read path', icon: Network },
+    { label: 'GraphRAG traversal', detail: 'entities · relations · citations', icon: Network },
     { label: 'Grounding gate', detail: 'Ollama · citations · abstention', icon: Check },
   ],
   'Video Blog App': [
