@@ -41,8 +41,8 @@ interface DesktopState {
 }
 
 export const useStore = create<DesktopState>((set) => ({
-  windows: [{ id: 'about', minimized: false, maximized: false, zIndex: 2 }],
-  activeWindowId: 'about',
+  windows: [],
+  activeWindowId: null,
   booted: false,
   locked: false,
   user: null,
