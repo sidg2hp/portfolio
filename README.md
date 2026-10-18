@@ -81,6 +81,17 @@ NODE_ENV=production npm run start
 
 The production server serves the built frontend, exact resume PDF, and API on port 3000. On Windows PowerShell, use `$env:NODE_ENV="production"; npm run start`.
 
+## Deploy on Render
+
+The repository includes `render.yaml` with the working Render configuration:
+
+- Build command: `npm ci && npm run build`
+- Start command: `npm run start`
+- Health check: `/api/contact`
+- Node.js: `24.21.0`
+
+If configuring Render manually, use the same commands and set `NODE_ENV=production`. Do not use `vite preview` as the start command; the Express server must run so the API and resume endpoint are available.
+
 ## Docker
 
 The Dockerfile pins the Node image, installs the lockfile dependencies, builds the frontend, and runs the Express server:
