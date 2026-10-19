@@ -12,7 +12,13 @@ const sections = [
   ['achievements', 'Achievements'],
 ];
 
-const featuredProjects = projects.slice(0, 3);
+// Keep the About app intentionally concise while showing range: agentic AI,
+// low-level systems, and applied ML/product engineering.
+const featuredProjects = [
+  projects.find((project) => project.title === 'Enterprise Knowledge Assistant'),
+  projects.find((project) => project.title === 'NetSentinel'),
+  projects.find((project) => project.title === 'FlixPulse'),
+].filter((project): project is (typeof projects)[number] => Boolean(project));
 
 export const AboutApp: React.FC = () => {
   const { openWindow } = useStore();
