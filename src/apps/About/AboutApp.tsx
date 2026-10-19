@@ -12,6 +12,8 @@ const sections = [
   ['achievements', 'Achievements'],
 ];
 
+const featuredProjects = projects.slice(0, 3);
+
 export const AboutApp: React.FC = () => {
   const { openWindow } = useStore();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -98,7 +100,7 @@ export const AboutApp: React.FC = () => {
       <section className="about-section-block" id="about-projects">
         <div className="about-section-heading"><p className="about-kicker">SELECTED WORK / 03</p><span>Click a project to expand</span></div>
         <div className="about-project-list">
-          {projects.map((project) => {
+          {featuredProjects.map((project) => {
             const expanded = expandedProject === project.title;
             return <article className={`about-project-row ${expanded ? 'is-expanded' : ''}`} key={project.title}>
               <button className="about-project-toggle" onClick={() => setExpandedProject(expanded ? null : project.title)} aria-expanded={expanded}>
