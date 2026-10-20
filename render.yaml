@@ -3,6 +3,8 @@ services:
     name: siddhartha-portfolio
     runtime: node
     plan: free
+    domains:
+      - sidg.dev
     buildCommand: npm ci && npm run build
     startCommand: npm run start
     healthCheckPath: /api/contact
